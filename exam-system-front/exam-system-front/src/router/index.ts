@@ -42,7 +42,7 @@ const router = createRouter({
 })
 
 // 路由守卫（简单认证）
-router.beforeEach((to, _from, next) => {
+router.beforeEach((to, from, next) => {
   const isLogin = localStorage.getItem('username')
   if (to.meta.requiresAuth && !isLogin) {
     next('/login')
