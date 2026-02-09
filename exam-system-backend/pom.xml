@@ -12,73 +12,47 @@
     <artifactId>exam-system-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>exam-system-backend</name>
-
+    
     <properties>
         <java.version>1.8</java.version>
         <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
-        <!-- 【新增】定义MySQL驱动版本常量，便于统一管理 -->
-        <mysql.version>8.0.36</mysql.version>
     </properties>
-
-    <!-- 【新增】配置多仓库源：优先阿里云，兜底官方中央仓库 -->
-    <repositories>
-        <!-- 阿里云仓库（优先） -->
-        <repository>
-            <id>aliyunmaven</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <!-- Maven官方中央仓库（兜底，解决8.0.36版本找不到问题） -->
-        <repository>
-            <id>central</id>
-            <url>https://repo1.maven.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
+    
     <dependencies>
         <!-- Spring Boot 核心 Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        
         <!-- 登录认证 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
+        
         <!-- MyBatis-Plus 简化数据库操作 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
         </dependency>
-
-        <!-- H2 内存数据库（保留，开发环境可切换使用） -->
+        
+        <!-- 修改前 -->
+        <!-- H2 内存数据库-默认配置
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- 【新增】MySQL 8.0.35 驱动依赖（与服务器MySQL版本一致） -->
+        -->
+        
+        <!-- H2 内存数据库-添加 MySQL 驱动依赖 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.0.33</version>
-            <scope>runtime</scope> <!-- 仅运行时依赖，不参与编译 -->
+            <scope>runtime</scope>
         </dependency>
 
         <!-- 简化实体类代码 -->
@@ -87,13 +61,13 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
+        
         <!-- 数据校验 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
+        
         <!-- 测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -101,21 +75,15 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <!-- 必须指定与父依赖一致的版本，比如你的父版本是 2.7.18 -->
+            <version>2.7.18</version>
+            <!-- 去掉不必要的 Lombok 排除 -->
+        </plugin>
+    </plugins>
     </build>
 </project>
