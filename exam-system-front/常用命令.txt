@@ -1,0 +1,5 @@
+
+#会把 dist 目录打包并压缩成 .tar.gz 文件，同时自动带上当前日期
+tar -czvf dist_backup_$(date +%Y%m%d).tar.gz dist/
+
+tar -czvf exam-system-backend_backup_$(date +%Y%m%d).tar.gz exam-system-backend/

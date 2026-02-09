@@ -3,12 +3,21 @@ import Login from '../views/Login.vue'
 import ModuleSelect from '../views/ModuleSelect.vue'
 import ExamList from '../views/ExamList.vue'
 import ExamEdit from '../views/ExamEdit.vue'
+import Center from '../views/Center.vue'
+import OASystem from '../views/OASystem.vue'
+import PersonalCenter from '../views/PersonalCenter.vue'
+import HISSystem from '../views/HISSystem.vue'
 
 // 路由规则
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    name: 'Center',
+    component: Center
+  },
+  {
+    path: '/center',
+    redirect: '/'
   },
   {
     path: '/login',
@@ -32,6 +41,21 @@ const routes = [
     name: 'ExamEdit',
     component: ExamEdit,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/oa',
+    name: 'OASystem',
+    component: OASystem
+  },
+  {
+    path: '/personal',
+    name: 'PersonalCenter',
+    component: PersonalCenter
+  },
+  {
+    path: '/his',
+    name: 'HISSystem',
+    component: HISSystem
   }
 ]
 
