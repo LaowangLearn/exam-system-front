@@ -13,10 +13,11 @@ const routes = [
   {
     path: '/',
     name: 'Center',
-    component: Center
+    component: Center,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/center',
+    path: '/home',
     redirect: '/'
   },
   {
@@ -67,8 +68,10 @@ const router = createRouter({
 
 // 路由守卫（简单认证）
 router.beforeEach((to, _from, next) => {
-  const isLogin = localStorage.getItem('username')
-  if (to.meta.requiresAuth && !isLogin) {
+  const username = localStorage.getItem('username')
+  console.log('路由守卫触发:', to.path, 'requiresAuth:', to.meta.requiresAuth, 'username:', username)
+  if (to.meta.requiresAuth && !username) {
+    console.log('重定向到登录页')
     next('/login')
   } else {
     next()

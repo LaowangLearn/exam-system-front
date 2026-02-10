@@ -49,10 +49,31 @@ const examList = ref<any[]>([])
 // 加载考试列表
 const loadExamList = async () => {
     try {
-        const res = await request.get(`/exams/list/${username}`) as any
-        examList.value = res
+        console.log('加载考试列表，用户名:', username)
+        console.log('请求URL:', `/exams/list/${username}`)
+        // 本地模拟数据
+        const mockData = [
+            {
+                id: 1,
+                title: '测试考试1',
+                status: { code: 0 },
+                createTime: '2026-02-10 10:00:00',
+                updateTime: '2026-02-10 10:00:00'
+            },
+            {
+                id: 2,
+                title: '测试考试2',
+                status: { code: 1 },
+                createTime: '2026-02-10 11:00:00',
+                updateTime: '2026-02-10 11:00:00'
+            }
+        ]
+        examList.value = mockData
+        console.log('使用本地模拟数据:', mockData)
     } catch (error) {
+        console.error('加载失败:', error)
         ElMessage.error('考试列表加载失败')
+        examList.value = []
     }
 }
 

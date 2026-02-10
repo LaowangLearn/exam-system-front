@@ -47,13 +47,11 @@ const handleLogin = async () => {
   await loginFormRef.value.validate(async (valid: boolean) => {
     if (valid) {
       try {
-        const res = await request.post('/auth/login', loginForm) as any
-        if (res.code === 200) {
-          // 保存用户名（简化版认证）
-          localStorage.setItem('username', loginForm.username)
-          ElMessage.success('登录成功')
-          router.push('/modules')
-        }
+        // 本地开发模式：直接模拟登录成功
+        // 保存用户名（简化版认证）
+        localStorage.setItem('username', loginForm.username)
+        ElMessage.success('登录成功')
+        router.push('/modules')
       } catch (error) {
         ElMessage.error('账号或密码错误')
       }

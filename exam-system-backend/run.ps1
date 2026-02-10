@@ -3,7 +3,7 @@ Write-Host "Starting Exam System Backend"
 Write-Host "========================================"
 
 # 设置 Java 路径
-$env:JAVA_HOME = "D:\programming\java\windowsx64\jdk-8u381-windows-x64\program"
+$env:JAVA_HOME = "D:\programming\java\windowsx64\jdk-8u381-windows-x64"
 $env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
 
 # 检查 Java 版本

@@ -3,6 +3,7 @@
     <div class="center-header">
       <h1>综合系统中心</h1>
       <p>欢迎使用系统管理平台</p>
+      <el-button type="danger" @click="clearStorage">清除登录状态</el-button>
     </div>
     
     <div class="center-content">
@@ -71,11 +72,12 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { ElButton, ElMessage } from 'element-plus'
 
 const router = useRouter()
 
 const goToExamSystem = () => {
-  router.push('/login')
+  router.push('/modules')
 }
 
 const goToOASystem = () => {
@@ -88,6 +90,11 @@ const goToPersonalCenter = () => {
 
 const goToHISSystem = () => {
   router.push('/his')
+}
+
+const clearStorage = () => {
+  localStorage.removeItem('username')
+  ElMessage.success('登录状态已清除')
 }
 </script>
 
@@ -106,6 +113,10 @@ const goToHISSystem = () => {
   text-align: center;
   margin-bottom: 40px;
   color: white;
+}
+
+.center-header button {
+  margin-top: 20px;
 }
 
 .center-header h1 {
