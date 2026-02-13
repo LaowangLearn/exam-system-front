@@ -1,6 +1,9 @@
 <template>
     <div class="exam-edit-container">
-        <el-page-header content="编辑考试"></el-page-header>
+        <div class="page-header">
+            <button class="back-button" @click="goBack">返回中心</button>
+            <el-page-header content="编辑考试"></el-page-header>
+        </div>
 
         <el-form :model="examForm" :rules="examRules" ref="examFormRef" label-width="100px" style="margin-top: 20px">
             <!-- 考试基本信息 -->
@@ -66,6 +69,11 @@ import request from '../utils/request'
 
 // 路由实例
 const router = useRouter()
+
+// 返回中心
+const goBack = () => {
+  router.push('/')
+}
 const route = useRoute()
 
 // 表单引用
@@ -205,6 +213,30 @@ onMounted(() => {
 <style scoped>
 .exam-edit-container {
     padding: 20px;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .question-item {

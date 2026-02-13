@@ -1,7 +1,10 @@
 <template>
     <div class="exam-list-container">
         <div class="exam-list-header">
-            <el-page-header content="考试列表"></el-page-header>
+            <div class="header-left">
+                <button class="back-button" @click="goBack">返回中心</button>
+                <el-page-header content="考试列表"></el-page-header>
+            </div>
             <el-button type="primary" @click="handleCreateExam">新建考试</el-button>
         </div>
 
@@ -39,6 +42,11 @@ import request from '../utils/request'
 
 // 路由实例
 const router = useRouter()
+
+// 返回中心
+const goBack = () => {
+  router.push('/')
+}
 
 // 用户名
 const username = localStorage.getItem('username') || ''
@@ -115,5 +123,28 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.back-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>
