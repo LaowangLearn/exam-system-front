@@ -38,20 +38,10 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
         
-        <!-- 修改前 -->
-        <!-- H2 内存数据库-默认配置
+        <!-- H2 内存数据库-默认配置 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        -->
-        
-        <!-- H2 内存数据库-添加 MySQL 驱动依赖 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>8.0.33</version>
             <scope>runtime</scope>
         </dependency>
 

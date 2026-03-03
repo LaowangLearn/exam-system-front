@@ -25,8 +25,20 @@ public class ExamController {
      * 保存/暂存考试
      */
     @PostMapping
-    public Exam saveExam(@RequestBody ExamSaveRequest request) {
-        return examService.saveExamWithQuestions(request.getExam(), request.getQuestions());
+    public Map<String, Object> saveExam(@RequestBody ExamSaveRequest request) {
+        try {
+            Exam exam = examService.saveExamWithQuestions(request.getExam(), request.getQuestions());
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 200);
+            result.put("id", exam.getId());
+            result.put("exam", exam);
+            return result;
+        } catch (Exception e) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 500);
+            result.put("message", "保存失败：" + e.getMessage());
+            return result;
+        }
     }
 
     /**
@@ -45,10 +57,20 @@ public class ExamController {
      * 根据考试ID查询详情（包含试题）
      */
     @GetMapping("/{id}")
-    public ExamDetailResponse getExamDetail(@PathVariable Long id) {
+    public Map<String, Object> getExamDetail(@PathVariable Long id) {
         Exam exam = examService.getById(id);
+        if (exam == null) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 404);
+            result.put("message", "考试不存在");
+            return result;
+        }
         List<ExamQuestion> questions = examService.getQuestionsByExamId(id);
-        return new ExamDetailResponse(exam, questions);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("exam", exam);
+        result.put("questions", questions);
+        return result;
     }
 
     /**

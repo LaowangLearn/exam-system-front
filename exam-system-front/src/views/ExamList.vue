@@ -98,13 +98,18 @@ const handleEditExam = (id: number) => {
 // 提交考试
 const handleSubmitExam = async (id: number) => {
     try {
-        const res = await request.put(`/exams/${id}/submit`) as any
-        if (res.code === 200) {
+        // 本地模拟提交
+        console.log('提交考试，ID:', id)
+        // 更新本地模拟数据
+        const examIndex = examList.value.findIndex(exam => exam.id === id)
+        if (examIndex !== -1) {
+            examList.value[examIndex].status.code = 1
+            examList.value[examIndex].updateTime = new Date().toISOString().replace('T', ' ').substring(0, 19)
             ElMessage.success('提交成功')
-            loadExamList()
         }
     } catch (error) {
-        ElMessage.error('提交失败')
+        console.error('提交失败:', error)
+        ElMessage.error('提交失败，请稍后重试')
     }
 }
 

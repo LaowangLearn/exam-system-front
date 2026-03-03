@@ -62,6 +62,33 @@
           <span class="arrow">→</span>
         </div>
       </div>
+      
+      <div class="system-card" @click="goToSystemSettings">
+        <div class="system-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </div>
+        <h3>系统设置</h3>
+        <p>用户、权限与系统配置</p>
+        <div class="card-footer">
+          <span class="arrow">→</span>
+        </div>
+      </div>
+      
+      <div class="system-card" @click="goToGameCenter">
+        <div class="system-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <h3>游戏中心</h3>
+        <p>休闲娱乐游戏集合</p>
+        <div class="card-footer">
+          <span class="arrow">→</span>
+        </div>
+      </div>
     </div>
     
     <div class="center-footer">
@@ -90,6 +117,14 @@ const goToPersonalCenter = () => {
 
 const goToHISSystem = () => {
   router.push('/his')
+}
+
+const goToSystemSettings = () => {
+  router.push('/system-settings')
+}
+
+const goToGameCenter = () => {
+  router.push('/game-center')
 }
 
 const clearStorage = () => {
