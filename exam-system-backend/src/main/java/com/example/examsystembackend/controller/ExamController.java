@@ -17,6 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/exams")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ExamController {
 
     private final ExamService examService;

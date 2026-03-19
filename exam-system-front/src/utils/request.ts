@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 
 // 创建Axios实例
 const service = axios.create({
-  baseURL: 'https://120.46.200.253:8080/api',
+  baseURL: 'http://120.46.200.253:8080/api',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
@@ -27,7 +27,10 @@ service.interceptors.response.use(
   (response) => {
     const res = response.data
     if (res.code && res.code !== 200) {
-      ElMessage.error(res.message || '请求失败')
+      // 对于404等预期内的错误，不显示全局错误消息，让业务代码自行处理
+      if (res.code !== 404) {
+        ElMessage.error(res.message || '请求失败')
+      }
       return Promise.reject(res)
     }
     return res

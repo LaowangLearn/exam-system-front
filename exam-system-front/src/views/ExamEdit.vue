@@ -118,8 +118,14 @@ const loadExamDetail = async () => {
         examForm.title = res.exam.title
         examForm.description = res.exam.description
         examForm.questions = res.questions.length > 0 ? res.questions : examForm.questions
-    } catch (error) {
-        ElMessage.error('考试详情加载失败')
+    } catch (error: any) {
+        console.log('Error:', error)
+        if (error.code === 404) {
+            // 考试不存在，显示空表单（新建模式）
+            console.log('考试不存在，显示空表单')
+        } else {
+            ElMessage.error(error.message || '考试详情加载失败')
+        }
     }
 }
 
