@@ -83,6 +83,24 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElButton } from 'element-plus'
 
+// 导入坦克大战图片资源
+import playerUp from '@/assets/images/tank/pltankU.gif'
+import playerDown from '@/assets/images/tank/pltankD.gif'
+import playerLeft from '@/assets/images/tank/pltankL.gif'
+import playerRight from '@/assets/images/tank/pltankR.gif'
+import enemyUp from '@/assets/images/tank/pltankU.gif'
+import enemyDown from '@/assets/images/tank/pltankD.gif'
+import enemyLeft from '@/assets/images/tank/pltankL.gif'
+import enemyRight from '@/assets/images/tank/pltankR.gif'
+import brick from '@/assets/images/tank/brick.png'
+import steel from '@/assets/images/tank/steel.png'
+import water from '@/assets/images/tank/water.png'
+import grass from '@/assets/images/tank/grass.png'
+import base from '@/assets/images/tank/base.png'
+import baseDestroyed from '@/assets/images/tank/base-destroyed.png'
+import bullet from '@/assets/images/tank/bullet.png'
+import enemyBullet from '@/assets/images/tank/enemy-bullet.png'
+
 const router = useRouter()
 
 const MAP_WIDTH = 26
@@ -669,23 +687,40 @@ onUnmounted(() => {
 }
 
 .map-cell.player {
-  background: #FFD700 !important;
   position: relative;
 }
 
-.map-cell.player-up::after,
-.map-cell.player-down::after,
-.map-cell.player-left::after,
-.map-cell.player-right::after {
-  content: '';
-  position: absolute;
-  background: #4CAF50;
+.map-cell.player-up {
+  background: #FFD700 !important;
+  background-image: url('@/assets/images/tank/pltankU.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.map-cell.player-up::after { top: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 8px; }
-.map-cell.player-down::after { bottom: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 8px; }
-.map-cell.player-left::after { left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 4px; }
-.map-cell.player-right::after { right: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 4px; }
+.map-cell.player-down {
+  background: #FFD700 !important;
+  background-image: url('@/assets/images/tank/pltankD.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.map-cell.player-left {
+  background: #FFD700 !important;
+  background-image: url('@/assets/images/tank/pltankL.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.map-cell.player-right {
+  background: #FFD700 !important;
+  background-image: url('@/assets/images/tank/pltankR.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 .map-cell.enemy {
   background: #e74c3c !important;

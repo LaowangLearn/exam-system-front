@@ -1,8 +1,9 @@
 <template>
   <div class="oa-schedules">
+    <button class="back-btn" @click="goBack">返回企业系统</button>
     <div class="page-header">
       <h1>日程管理</h1>
-      <button class="add-btn" @click="openAddScheduleDialog">新建日程</button>
+      <button class="add-btn" @click="openAddScheduleDialog">添加日程</button>
     </div>
 
     <div class="schedule-filter">
@@ -111,7 +112,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/enterprise')
+}
 
 // 日程列表
 const schedules = ref([
@@ -275,6 +283,29 @@ onMounted(() => {
   min-height: 100vh;
   background: #f5f7fa;
   padding: 20px;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  z-index: 10;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
 .page-header {

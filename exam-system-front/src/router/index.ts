@@ -4,7 +4,9 @@ import ModuleSelect from '../views/ModuleSelect.vue'
 import ExamList from '../views/ExamList.vue'
 import ExamEdit from '../views/ExamEdit.vue'
 import Center from '../views/Center.vue'
+import CenterNew from '../views/CenterNew.vue'
 import OASystem from '../views/OASystem.vue'
+import EnterpriseSystem from '../views/EnterpriseSystem.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
 import HISSystem from '../views/HISSystem.vue'
 import Dashboard from '../views/OA/Dashboard.vue'
@@ -19,11 +21,25 @@ import TetrisGame from '../views/TetrisGame.vue'
 import TetrisMobile from '../views/TetrisMobile.vue'
 import TankBattle from '../views/TankBattle.vue'
 import TankBattleMobile from '../views/TankBattleMobile.vue'
+import OtherPlatforms from '../views/OtherPlatforms.vue'
+import LogAuditSystem from '../views/LogAuditSystem.vue'
+import LogAuditSystemNew from '../views/LogAuditSystemNew.vue'
+import HRMSystem from '../views/HRM/HRMSystem.vue'
+import FinanceSystem from '../views/Finance/FinanceSystem.vue'
+import ArchiveSystem from '../views/Archive/ArchiveSystem.vue'
+import MessageSystem from '../views/Message/MessageSystem.vue'
+import AssetSystem from '../views/Asset/AssetSystem.vue'
+
 
 // 路由规则
 const routes = [
   {
     path: '/',
+    name: 'CenterNew',
+    component: CenterNew
+  },
+  {
+    path: '/old-center',
     name: 'Center',
     component: Center
   },
@@ -132,7 +148,52 @@ const routes = [
   {
     path: '/game-center/netris',
     redirect: '/game-center/tetris'
-  }
+  },
+  {
+    path: '/other-platforms',
+    name: 'OtherPlatforms',
+    component: OtherPlatforms
+  },
+  {
+    path: '/log-audit',
+    name: 'LogAuditSystem',
+    component: LogAuditSystem
+  },
+  {
+    path: '/log-audit-new',
+    name: 'LogAuditSystemNew',
+    component: LogAuditSystemNew
+  },
+  {
+    path: '/enterprise',
+    name: 'EnterpriseSystem',
+    component: EnterpriseSystem
+  },
+  {
+    path: '/hrm',
+    name: 'HRMSystem',
+    component: HRMSystem
+  },
+  {
+    path: '/finance',
+    name: 'FinanceSystem',
+    component: FinanceSystem
+  },
+  {
+    path: '/archive',
+    name: 'ArchiveSystem',
+    component: ArchiveSystem
+  },
+  {
+    path: '/message',
+    name: 'MessageSystem',
+    component: MessageSystem
+  },
+  {
+    path: '/asset',
+    name: 'AssetSystem',
+    component: AssetSystem
+  },
 ]
 
 // 创建路由实例

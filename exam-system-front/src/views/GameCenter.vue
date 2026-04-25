@@ -328,11 +328,26 @@ const goToTankMobile = () => {
 .version-card .enter-btn {
   display: inline-block;
   padding: 8px 20px;
-  background: currentColor;
   color: white;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+.version-card.desktop .enter-btn {
+  background: #0284c7;
+}
+
+.version-card.mobile .enter-btn {
+  background: #ea580c;
+}
+
+.version-card.desktop-tank .enter-btn {
+  background: #2e7d32;
+}
+
+.version-card.mobile-tank .enter-btn {
+  background: #e65100;
 }
 
 @media (max-width: 500px) {

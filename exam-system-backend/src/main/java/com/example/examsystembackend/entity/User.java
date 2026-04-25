@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,6 +22,15 @@ public class User {
     private String position;
     private String role;
     private String status;
+    private String employeeId;
+    private String gender;
+    private LocalDate birthday;
+    private LocalDate joinDate;
+    private LocalDate leaveDate;
+    private String education;
+    private String specialty;
+    private String emergencyContact;
+    private String emergencyPhone;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

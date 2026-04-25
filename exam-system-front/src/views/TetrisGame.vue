@@ -55,12 +55,17 @@
             <div class="lines">{{ lines }}</div>
           </div>
           
+          <div class="info-item">
+            <h3>复活次数</h3>
+            <div class="revive-count">{{ reviveCount }}</div>
+          </div>
+          
           <div class="controls-info">
             <h3>操作说明</h3>
             <ul>
               <li>← → 移动方块</li>
-              <li>↓ 加速下落</li>
-              <li>↑ 旋转方块</li>
+              <li>↓ 逆时针旋转</li>
+              <li>↑ 顺时针旋转</li>
               <li>空格 直接下落</li>
             </ul>
           </div>
@@ -71,7 +76,11 @@
         <h2>游戏结束</h2>
         <p>最终得分: {{ score }}</p>
         <p>消除行数: {{ lines }}</p>
-        <el-button type="primary" @click="resetGame">再来一局</el-button>
+        <p v-if="reviveCount > 0">剩余复活次数: {{ reviveCount }}</p>
+        <div class="game-over-buttons">
+          <el-button v-if="reviveCount > 0" type="success" @click="reviveGame">复活 ({{ reviveCount }}次)</el-button>
+          <el-button type="primary" @click="resetGame">再来一局</el-button>
+        </div>
       </div>
     </div>
     
@@ -137,6 +146,7 @@ const score = ref(0)
 const level = ref(1)
 const lines = ref(0)
 const dropInterval = ref(1000)
+const reviveCount = ref(66) // 默认66次复活机会
 let dropTimer: number | null = null
 let lastTime = 0
 
@@ -188,13 +198,25 @@ const checkCollision = (piece: any, offsetX: number = 0, offsetY: number = 0) =>
 }
 
 // 旋转方块
-const rotatePiece = (piece: any) => {
-  const rotatedShape = piece.shape[0].map((_, index) => 
-    piece.shape.map(row => row[index]).reverse()
-  )
-  return {
-    ...piece,
-    shape: rotatedShape
+const rotatePiece = (piece: any, clockwise: boolean = true) => {
+  if (clockwise) {
+    // 顺时针旋转
+    const rotatedShape = piece.shape[0].map((_, index) => 
+      piece.shape.map(row => row[index]).reverse()
+    )
+    return {
+      ...piece,
+      shape: rotatedShape
+    }
+  } else {
+    // 逆时针旋转
+    const rotatedShape = piece.shape[0].map((_, index) => 
+      piece.shape.map(row => row[index])
+    ).reverse()
+    return {
+      ...piece,
+      shape: rotatedShape
+    }
   }
 }
 
@@ -286,10 +308,10 @@ const hardDrop = () => {
 }
 
 // 旋转方块
-const rotateCurrentPiece = () => {
+const rotateCurrentPiece = (clockwise: boolean = true) => {
   if (!currentPiece.value || !gameStarted.value || gameOver.value || isPaused.value) return
   
-  const rotated = rotatePiece(currentPiece.value)
+  const rotated = rotatePiece(currentPiece.value, clockwise)
   if (!checkCollision(rotated)) {
     currentPiece.value = rotated
   }
@@ -319,6 +341,7 @@ const startGame = () => {
     score.value = 0
     level.value = 1
     lines.value = 0
+    reviveCount.value = 66 // 开始新游戏时重置复活次数
     dropInterval.value = 1000
     gameStarted.value = true
     gameOver.value = false
@@ -351,6 +374,32 @@ const resetGame = () => {
   score.value = 0
   level.value = 1
   lines.value = 0
+  reviveCount.value = 66 // 重置游戏时恢复复活次数
+}
+
+// 复活游戏
+const reviveGame = () => {
+  if (reviveCount.value > 0) {
+    reviveCount.value-- // 消耗一次复活次数
+    
+    // 清除最上面6行方块
+    for (let y = 0; y < 6 && y < BOARD_HEIGHT; y++) {
+      for (let x = 0; x < BOARD_WIDTH; x++) {
+        board.value[y][x] = 0
+      }
+    }
+    
+    // 生成新的当前方块
+    currentPiece.value = generatePiece()
+    // 保持下一个方块不变
+    // 保留分数、等级、行数等数据
+    
+    gameOver.value = false // 取消游戏结束状态
+    gameStarted.value = true // 开始游戏
+    isPaused.value = false // 取消暂停状态
+    lastTime = performance.now() // 重置时间
+    dropTimer = requestAnimationFrame(gameLoop) // 重新开始游戏循环
+  }
 }
 
 // 返回游戏中心
@@ -428,10 +477,10 @@ const handleKeydown = (event: KeyboardEvent) => {
       movePiece(1)
       break
     case 'ArrowDown':
-      movePiece(0, 1)
+      rotateCurrentPiece(false) // 逆时针旋转
       break
     case 'ArrowUp':
-      rotateCurrentPiece()
+      rotateCurrentPiece(true) // 顺时针旋转
       break
     case ' ': // 空格键
       hardDrop()
@@ -456,26 +505,39 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* 全局样式重置，防止页面滚动 */
+:root {
+  overflow: hidden;
+}
+
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 .tetris-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%);
-  padding: 20px;
+  padding: 10px;
   color: white;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .tetris-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 900px;
 }
 
 .tetris-header h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -485,29 +547,36 @@ onUnmounted(() => {
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
 .game-content {
   display: flex;
-  gap: 40px;
+  gap: 20px;
   align-items: flex-start;
   width: 100%;
-  max-width: 1000px;
+  max-width: 900px;
   position: relative;
+  flex: 1;
+  overflow: hidden;
 }
 
 .game-area {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   align-items: flex-start;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tetris-board {
   border: 3px solid #333;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 10px;
+  padding: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
 }
 
 .tetris-row {
@@ -515,8 +584,8 @@ onUnmounted(() => {
 }
 
 .tetris-cell {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 2px;
   margin: 1px;
@@ -538,28 +607,29 @@ onUnmounted(() => {
 .game-info {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-width: 250px;
+  gap: 15px;
+  min-width: 220px;
+  flex-shrink: 0;
 }
 
 .info-item {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 15px;
+  padding: 12px;
   text-align: center;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .info-item h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #f0f0f0;
 }
 
-.score, .level, .lines {
-  font-size: 2rem;
+.score, .level, .lines, .revive-count {
+  font-size: 1.8rem;
   font-weight: 700;
   color: #ffeb3b;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -569,7 +639,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .next-row {
@@ -577,8 +647,8 @@ onUnmounted(() => {
 }
 
 .next-cell {
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 2px;
   margin: 1px;
@@ -592,13 +662,13 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 15px;
+  padding: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .controls-info h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #f0f0f0;
   text-align: center;
@@ -611,12 +681,12 @@ onUnmounted(() => {
 }
 
 .controls-info li {
-  margin-bottom: 8px;
-  font-size: 1rem;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
   color: #e0e0e0;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .game-over {
@@ -627,59 +697,126 @@ onUnmounted(() => {
   background: rgba(0, 0, 0, 0.9);
   border: 3px solid #ff3b30;
   border-radius: 16px;
-  padding: 40px;
+  padding: 30px;
   text-align: center;
   box-shadow: 0 20px 60px rgba(255, 59, 48, 0.4);
   z-index: 100;
 }
 
 .game-over h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 15px;
   color: #ff3b30;
   font-weight: 700;
 }
 
 .game-over p {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
   color: #f0f0f0;
 }
 
-.tetris-footer {
-  margin-top: 40px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+.game-over-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
+.tetris-footer {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
+  .tetris-container {
+    padding: 5px;
+  }
+  
+  .tetris-header h1 {
+    font-size: 2rem;
+  }
+  
   .game-content {
     flex-direction: column;
     align-items: center;
+    gap: 15px;
   }
   
   .game-area {
     flex-direction: column;
     align-items: center;
-  }
-  
-  .tetris-header h1 {
-    font-size: 2.2rem;
+    gap: 15px;
   }
   
   .game-controls {
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .game-controls button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
   }
   
   .tetris-cell {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
   }
   
   .next-cell {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .game-info {
+    min-width: 200px;
+  }
+  
+  .info-item {
+    padding: 10px;
+  }
+  
+  .score, .level, .lines {
+    font-size: 1.5rem;
+  }
+  
+  .game-over {
+    padding: 20px;
+  }
+  
+  .game-over h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tetris-cell {
     width: 20px;
     height: 20px;
+  }
+  
+  .next-cell {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .game-info {
+    min-width: 180px;
+  }
+  
+  .tetris-header h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* 防止触摸设备上的滚动 */
+@media (hover: none) and (pointer: coarse) {
+  .tetris-container {
+    touch-action: none;
   }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="oa-users">
+    <button class="back-btn" @click="goBack">返回企业系统</button>
     <div class="page-header">
       <h1>用户管理</h1>
       <button class="add-btn" @click="openAddUserDialog">添加用户</button>
@@ -109,6 +110,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/enterprise')
+}
 
 // 用户列表
 const users = ref([
@@ -221,6 +229,29 @@ onMounted(() => {
   min-height: 100vh;
   background: #f5f7fa;
   padding: 20px;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  z-index: 10;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
 .page-header {

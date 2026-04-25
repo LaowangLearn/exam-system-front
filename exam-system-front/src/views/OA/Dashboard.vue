@@ -1,5 +1,6 @@
 <template>
   <div class="oa-dashboard">
+    <button class="back-btn" @click="goBack">返回企业系统</button>
     <div class="dashboard-header">
       <h1>OA系统仪表盘</h1>
       <p>欢迎回来，{{ username }}</p>
@@ -116,6 +117,10 @@ const todaySchedules = ref([
   { id: 2, title: '项目评审会', startTime: '14:00', endTime: '16:00', location: '会议室B' }
 ])
 
+const goBack = () => {
+  router.push('/enterprise')
+}
+
 onMounted(() => {
   // 模拟数据加载
   userCount.value = 50
@@ -130,6 +135,29 @@ onMounted(() => {
   min-height: 100vh;
   background: #f5f7fa;
   padding: 20px;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  z-index: 10;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
 .dashboard-header {
