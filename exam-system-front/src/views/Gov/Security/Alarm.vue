@@ -1,5 +1,6 @@
 <template>
   <div class="gov-security-alarm">
+    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
     <div class="page-header">
       <h1>告警记录管理</h1>
       <div class="header-actions">
@@ -31,7 +32,7 @@
         </el-table-column>
         <el-table-column prop="alarmContent" label="告警内容" />
         <el-table-column prop="alarmTime" label="告警时间" width="160" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="status" label="状�? width="100">
           <template #default="{ row }">
             <el-tag :type="getStatusType(row.status)">{{ getStatusLabel(row.status) }}</el-tag>
           </template>
@@ -49,22 +50,41 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
 
 const searchText = ref('')
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
+
 const searchLevel = ref('')
 
 const levelOptions = [
   { label: '全部', value: '' },
-  { label: '紧急', value: '1' },
+  { label: '紧�?, value: '1' },
   { label: '重要', value: '2' },
-  { label: '一般', value: '3' }
+  { label: '一�?, value: '3' }
 ]
+
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
 
 const tableData = ref([
   {
     id: 1,
     alarmCode: 'ALM20260428001',
-    deviceName: '小区东门摄像头',
+    deviceName: '小区东门摄像�?,
     alarmType: 1,
     alarmLevel: 1,
     alarmContent: '检测到可疑人员徘徊',
@@ -87,7 +107,7 @@ const tableData = ref([
     deviceName: '消防报警主机',
     alarmType: 3,
     alarmLevel: 1,
-    alarmContent: '烟雾探测器报警',
+    alarmContent: '烟雾探测器报�?,
     alarmTime: '2026-04-27 16:45:30',
     status: 3
   }
@@ -110,12 +130,12 @@ const handleHandle = (row) => {
 }
 
 const getTypeLabel = (type) => {
-  const types = { 1: '入侵检测', 2: '门禁异常', 3: '消防告警', 4: '设备故障' }
+  const types = { 1: '入侵检�?, 2: '门禁异常', 3: '消防告警', 4: '设备故障' }
   return types[type] || '其他'
 }
 
 const getLevelLabel = (level) => {
-  const levels = { 1: '紧急', 2: '重要', 3: '一般' }
+  const levels = { 1: '紧�?, 2: '重要', 3: '一�? }
   return levels[level] || '未知'
 }
 
@@ -125,7 +145,7 @@ const getLevelType = (level) => {
 }
 
 const getStatusLabel = (status) => {
-  const statuses = { 1: '待处理', 2: '处理中', 3: '已处置' }
+  const statuses = { 1: '待处�?, 2: '处理�?, 3: '已处�? }
   return statuses[status] || '未知'
 }
 

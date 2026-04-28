@@ -1,5 +1,6 @@
 <template>
   <div class="gov-security-device">
+    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
     <div class="page-header">
       <h1>安防设备管理</h1>
       <div class="header-actions">
@@ -25,7 +26,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="location" label="安装位置" width="150" />
-        <el-table-column prop="status" label="状态" width="100">
+        <el-table-column prop="status" label="状�? width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 1 ? 'success' : 'danger'">
               {{ row.status === 1 ? '在线' : '离线' }}
@@ -46,23 +47,42 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
 
 const searchText = ref('')
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
+
 const searchType = ref('')
 
 const typeOptions = [
   { label: '全部', value: '' },
-  { label: '摄像头', value: '1' },
+  { label: '摄像�?, value: '1' },
   { label: '门禁', value: '2' },
   { label: '报警主机', value: '3' },
   { label: '消防设备', value: '4' }
 ]
 
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
+
 const tableData = ref([
   {
     id: 1,
     deviceCode: 'DEV001',
-    deviceName: '小区东门摄像头',
+    deviceName: '小区东门摄像�?,
     deviceType: 1,
     location: '东门入口',
     status: 1,
@@ -82,7 +102,7 @@ const tableData = ref([
     deviceCode: 'DEV003',
     deviceName: '消防报警主机',
     deviceType: 4,
-    location: '消防控制室',
+    location: '消防控制�?,
     status: 1,
     installTime: '2026-02-01'
   }
@@ -105,7 +125,7 @@ const handleConfig = (row) => {
 }
 
 const getTypeLabel = (type) => {
-  const types = { 1: '摄像头', 2: '门禁', 3: '报警主机', 4: '消防设备' }
+  const types = { 1: '摄像�?, 2: '门禁', 3: '报警主机', 4: '消防设备' }
   return types[type] || '其他'
 }
 </script>

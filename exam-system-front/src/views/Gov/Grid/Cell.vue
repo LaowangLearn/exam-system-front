@@ -1,5 +1,6 @@
 <template>
   <div class="gov-grid-cell">
+    <button class="back-btn" @click="goBack">← 返回政务事业单位类</button>
     <div class="page-header">
       <h1>网格单元管理</h1>
       <div class="header-actions">
@@ -84,6 +85,13 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
 
 const treeProps = {
   children: 'children',
@@ -215,6 +223,28 @@ const getTypeLabel = (type) => {
 <style scoped>
 .gov-grid-cell {
   padding: 24px;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
 .page-header {

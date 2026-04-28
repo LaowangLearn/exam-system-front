@@ -1,9 +1,9 @@
 <template>
   <div class="his-container">
+    <button class="back-btn" @click="goBack">返回中心</button>
     <div class="his-header">
       <h1>HIS系统</h1>
       <p>医院信息管理系统</p>
-      <button class="back-btn" @click="goBack">返回中心</button>
     </div>
     
     <div class="his-content">
@@ -137,6 +137,28 @@ const goBack = () => {
   min-height: 100vh;
   background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   padding: 40px 20px;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
 .his-header {
@@ -153,18 +175,6 @@ const goBack = () => {
 .his-header p {
   font-size: 1.2rem;
   color: #666;
-  margin-bottom: 20px;
-}
-
-.back-btn {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s ease;
 }
 
 .back-btn:hover {

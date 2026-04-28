@@ -1,9 +1,9 @@
 <template>
   <div class="personal-container">
+    <button class="back-btn" @click="goBack">返回中心</button>
     <div class="personal-header">
       <h1>个人中心</h1>
       <p>个人信息管理中心</p>
-      <button class="back-btn" @click="goBack">返回中心</button>
     </div>
     
     <div class="personal-content">
@@ -107,8 +107,30 @@ const goBack = () => {
 <style scoped>
 .personal-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 40px 20px;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
 .personal-header {
@@ -125,23 +147,6 @@ const goBack = () => {
 .personal-header p {
   font-size: 1.2rem;
   opacity: 0.9;
-  margin-bottom: 20px;
-}
-
-.back-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.back-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
 }
 
 .personal-content {

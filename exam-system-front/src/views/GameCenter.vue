@@ -1,9 +1,9 @@
 <template>
   <div class="game-center-container">
+    <button class="back-btn" @click="goBack">返回中心</button>
     <div class="game-center-header">
       <h1>游戏中心</h1>
       <p>休闲娱乐，放松心情</p>
-      <el-button type="primary" @click="goBack">返回系统中心</el-button>
     </div>
     
     <div class="game-content">
@@ -166,16 +166,34 @@ const goToLandlord = () => {
   justify-content: center;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 20px;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
 .game-center-header {
   text-align: center;
   margin-bottom: 50px;
   color: #333;
-}
-
-.game-center-header button {
-  margin-top: 20px;
 }
 
 .game-center-header h1 {

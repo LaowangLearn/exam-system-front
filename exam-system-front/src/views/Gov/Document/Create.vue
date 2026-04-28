@@ -1,5 +1,6 @@
 <template>
   <div class="gov-document-create">
+    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
     <div class="page-header">
       <h1>新建公文</h1>
       <div class="header-actions">
@@ -16,28 +17,28 @@
             <el-option label="报告" :value="2" />
             <el-option label="请示" :value="3" />
             <el-option label="批复" :value="4" />
-            <el-option label="函" :value="5" />
+            <el-option label="�? :value="5" />
           </el-select>
         </el-form-item>
         <el-form-item label="密级" prop="docLevel">
           <el-select v-model="formData.docLevel">
-            <el-option label="普通" :value="4" />
+            <el-option label="普�? :value="4" />
             <el-option label="秘密" :value="3" />
             <el-option label="机密" :value="2" />
             <el-option label="绝密" :value="1" />
           </el-select>
         </el-form-item>
         <el-form-item label="公文标题" prop="docTitle">
-          <el-input v-model="formData.docTitle" placeholder="请输入公文标题" />
+          <el-input v-model="formData.docTitle" placeholder="请输入公文标�? />
         </el-form-item>
-        <el-form-item label="主送机关" prop="sendTo">
-          <el-input v-model="formData.sendTo" placeholder="请输入主送机关" />
+        <el-form-item label="主送机�? prop="sendTo">
+          <el-input v-model="formData.sendTo" placeholder="请输入主送机�? />
         </el-form-item>
-        <el-form-item label="抄送机关" prop="copyTo">
-          <el-input v-model="formData.copyTo" placeholder="请输入抄送机关" />
+        <el-form-item label="抄送机�? prop="copyTo">
+          <el-input v-model="formData.copyTo" placeholder="请输入抄送机�? />
         </el-form-item>
         <el-form-item label="公文正文" prop="docContent">
-          <el-textarea v-model="formData.docContent" :rows="15" placeholder="请输入公文正文" />
+          <el-textarea v-model="formData.docContent" :rows="15" placeholder="请输入公文正�? />
         </el-form-item>
         <el-form-item label="附件" prop="attachments">
           <div class="upload-area">
@@ -60,6 +61,7 @@
 
 <script setup>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
 const formData = reactive({
   docType: 1,

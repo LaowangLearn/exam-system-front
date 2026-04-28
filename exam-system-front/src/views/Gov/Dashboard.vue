@@ -1,5 +1,6 @@
 <template>
   <div class="gov-dashboard">
+    <button class="back-btn" @click="goBack">返回政务事业单位类</button>
     <div class="dashboard-header">
       <h1>政务一体化平台</h1>
       <p>统一政务服务与管理中心</p>
@@ -65,7 +66,13 @@
 </template>
 
 <script setup>
-// 政务一体化平台工作台
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goBack = () => {
+  router.push('/gov')
+}
 </script>
 
 <style scoped>
@@ -73,6 +80,28 @@
   padding: 24px;
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
 .dashboard-header {
