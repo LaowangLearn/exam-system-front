@@ -27,17 +27,100 @@
             <span class="mode-text">{{ isDayMode ? '夜间模式' : '白天模式' }}</span>
           </button>
           <button class="secondary-button" @click="switchToOld">切换到旧版本</button>
+          <div class="user-profile" @click="toggleUserMenu">
+            <div class="user-avatar">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="user-info">
+              <span class="user-name">张三</span>
+              <span class="user-role">管理员</span>
+            </div>
+            <svg class="user-arrow" :class="{ 'rotated': showUserMenu }" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            
+            <!-- 下拉菜单 -->
+            <div v-if="showUserMenu" class="user-dropdown">
+              <div class="dropdown-header">
+                <div class="dropdown-avatar">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div class="dropdown-user-info">
+                  <span class="dropdown-name">张三</span>
+                  <span class="dropdown-email">zhangsan@example.com</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-menu">
+                <div class="dropdown-item" @click="goToPersonalCenter">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  <span>个人信息</span>
+                </div>
+                <div class="dropdown-item" @click="goToChangePassword">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  <span>修改密码</span>
+                </div>
+                <div class="dropdown-item" @click="goToSystemSettings">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+                  <span>系统设置</span>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-item logout" @click="handleLogout">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
+                  <span>退出登录</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
       <!-- Hero区域 -->
       <div class="hero-section">
+        <!-- 粒子背景 -->
+        <div class="particles-container">
+          <div v-for="n in 20" :key="n" class="particle" :style="{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${3 + Math.random() * 4}s`,
+            width: `${4 + Math.random() * 8}px`,
+            height: `${4 + Math.random() * 8}px`
+          }"></div>
+        </div>
+        
+        <!-- 光环效果 -->
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        
         <div class="badge">
           <span class="badge-icon">✨</span>
           <span>Welcome to 澄心若素</span>
         </div>
         <h1 class="hero-title">
-          <span class="gradient-text main-title">澄心若素</span>
+          <span class="title-wrapper">
+            <span class="gradient-text main-title">澄心若素</span>
+            <span class="title-glow"></span>
+          </span>
           <span class="subtitle">· 纯净心灵，简约生活</span>
         </h1>
         <p class="hero-description">
@@ -132,21 +215,6 @@
         </div>
       </div>
       
-      <div class="system-card" @click="goToPersonalCenter">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </div>
-        <h3>个人中心</h3>
-        <p>个人信息管理中心</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
       <div class="system-card" @click="goToHISSystem">
         <div class="card-icon">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -156,21 +224,6 @@
         </div>
         <h3>HIS系统</h3>
         <p>医院信息管理系统</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
-      <div class="system-card" @click="goToSystemSettings">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
-        </div>
-        <h3>系统设置</h3>
-        <p>用户、权限与系统配置</p>
         <div class="card-hover">
           <span class="hover-text">立即访问</span>
           <span class="hover-arrow">→</span>
@@ -250,6 +303,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const router = useRouter()
 const isDayMode = ref(false)
 const currentDate = ref('')
+const showUserMenu = ref(false)
 let modeCheckInterval: number | null = null
 let dateUpdateInterval: number | null = null
 
@@ -282,6 +336,13 @@ const toggleMode = () => {
   localStorage.setItem('systemMode', isDayMode.value ? 'day' : 'night')
 }
 
+const handleClickOutside = (event: MouseEvent) => {
+  const target = event.target as HTMLElement
+  if (!target.closest('.user-profile')) {
+    showUserMenu.value = false
+  }
+}
+
 // 页面加载时检查本地存储的模式设置
 onMounted(() => {
   // 从本地存储读取模式设置
@@ -301,6 +362,9 @@ onMounted(() => {
   
   // 设置定时更新日期时间，每秒更新一次
   dateUpdateInterval = window.setInterval(updateCurrentDate, 1000)
+  
+  // 添加点击外部关闭菜单
+  document.addEventListener('click', handleClickOutside)
 })
 
 // 组件卸载时清除定时器
@@ -311,6 +375,8 @@ onUnmounted(() => {
   if (dateUpdateInterval) {
     clearInterval(dateUpdateInterval)
   }
+  // 移除点击外部关闭菜单
+  document.removeEventListener('click', handleClickOutside)
 })
 
 const goToExamSystem = () => {
@@ -331,6 +397,22 @@ const goToHISSystem = () => {
 
 const goToSystemSettings = () => {
   router.push('/system-settings')
+}
+
+const toggleUserMenu = () => {
+  showUserMenu.value = !showUserMenu.value
+}
+
+const goToChangePassword = () => {
+  showUserMenu.value = false
+  router.push('/personal#change-password')
+}
+
+const handleLogout = () => {
+  showUserMenu.value = false
+  localStorage.removeItem('username')
+  ElMessage.success('已成功退出登录')
+  router.push('/login')
 }
 
 const goToGameCenter = () => {
@@ -463,6 +545,149 @@ const clearStorage = () => {
   gap: 16px;
 }
 
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(128, 90, 213, 0.1);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(128, 90, 213, 0.2);
+}
+
+.user-profile:hover {
+  background: rgba(128, 90, 213, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(128, 90, 213, 0.2);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #805ad5 0%, #d53f8c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.95rem;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.user-arrow {
+  color: #a0aec0;
+  transition: transform 0.3s ease;
+}
+
+.user-profile:hover .user-arrow {
+  transform: rotate(180deg);
+}
+
+.user-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 240px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(128, 90, 213, 0.05) 0%, rgba(213, 63, 140, 0.05) 100%);
+}
+
+.dropdown-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #805ad5 0%, #d53f8c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.dropdown-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-name {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.95rem;
+}
+
+.dropdown-email {
+  font-size: 0.8rem;
+  color: #718096;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  margin: 0;
+}
+
+.dropdown-menu {
+  padding: 4px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #4a5568;
+}
+
+.dropdown-item:hover {
+  background: rgba(128, 90, 213, 0.08);
+  color: #805ad5;
+}
+
+.dropdown-item.logout {
+  color: #e53e3e;
+}
+
+.dropdown-item.logout:hover {
+  background: rgba(229, 62, 62, 0.1);
+  color: #e53e3e;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -497,6 +722,83 @@ const clearStorage = () => {
   margin: 0 auto 48px;
   position: relative;
   z-index: 10;
+  overflow: hidden;
+}
+
+/* 粒子背景 */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(128, 90, 213, 0.6) 0%, rgba(213, 63, 140, 0.3) 50%, transparent 100%);
+  animation: float-particle cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  box-shadow: 0 0 8px rgba(128, 90, 213, 0.4), 0 0 16px rgba(213, 63, 140, 0.2);
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateY(-30px) translateX(15px) scale(1.05);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-50px) translateX(0) scale(0.95);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-25px) translateX(-12px) scale(1.02);
+    opacity: 0.5;
+  }
+}
+
+/* 光环效果 */
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(128, 90, 213, 0.15);
+  animation: rotate-ring linear infinite;
+}
+
+.ring-1 {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-duration: 20s;
+}
+
+.ring-2 {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-duration: 30s;
+  animation-direction: reverse;
+  border-width: 1px;
+  border-color: rgba(213, 63, 140, 0.1);
+}
+
+@keyframes rotate-ring {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .badge {
@@ -529,12 +831,31 @@ const clearStorage = () => {
   gap: 12px;
 }
 
+.title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .main-title {
   font-size: 4.5rem;
   font-weight: 900;
   letter-spacing: 8px;
-  text-shadow: 0 4px 20px rgba(128, 90, 213, 0.3);
-  animation: glow 2s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 20px rgba(128, 90, 213, 0.3));
+}
+
+.title-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(ellipse at center, rgba(128, 90, 213, 0.25) 0%, rgba(213, 63, 140, 0.15) 40%, transparent 70%);
+  filter: blur(30px);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .subtitle {
@@ -542,15 +863,6 @@ const clearStorage = () => {
   font-weight: 500;
   color: #718096;
   letter-spacing: 2px;
-}
-
-@keyframes glow {
-  from {
-    text-shadow: 0 4px 20px rgba(128, 90, 213, 0.3);
-  }
-  to {
-    text-shadow: 0 4px 30px rgba(128, 90, 213, 0.6), 0 0 40px rgba(128, 90, 213, 0.3);
-  }
 }
 
 .gradient-text {
@@ -575,6 +887,8 @@ const clearStorage = () => {
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
 }
 
 /* 按钮样式 */
