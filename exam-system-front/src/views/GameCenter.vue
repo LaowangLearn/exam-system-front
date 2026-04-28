@@ -39,6 +39,21 @@
           <span class="play-btn">选择版本</span>
         </div>
       </div>
+      
+      <div class="game-card landlord-card" @click="goToLandlord">
+        <div class="game-icon">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+            <path d="M8 9l4 4 4-4"></path>
+            <path d="M12 13v4"></path>
+          </svg>
+        </div>
+        <h3>斗地主</h3>
+        <p>经典扑克游戏，与AI对决</p>
+        <div class="game-footer landlord-footer">
+          <span class="play-btn">开始游戏</span>
+        </div>
+      </div>
     </div>
     
     <div class="game-center-footer">
@@ -135,6 +150,10 @@ const goToTankDesktop = () => {
 const goToTankMobile = () => {
   showTankOptions.value = false
   router.push('/game-center/tank-battle-mobile')
+}
+
+const goToLandlord = () => {
+  router.push('/game-center/landlord')
 }
 </script>
 
@@ -376,6 +395,22 @@ const goToTankMobile = () => {
 
 .game-card.tank-card:hover .game-footer {
   background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+}
+
+.game-card.landlord-card .game-icon {
+  color: #f39c12;
+}
+
+.game-card.landlord-card:hover {
+  border-color: #f39c12;
+}
+
+.game-card.landlord-card .game-footer {
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+.game-card.landlord-card:hover .game-footer {
+  background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
 }
 
 .version-card.desktop-tank {

@@ -21,6 +21,7 @@ import TetrisGame from '../views/TetrisGame.vue'
 import TetrisMobile from '../views/TetrisMobile.vue'
 import TankBattle from '../views/TankBattle.vue'
 import TankBattleMobile from '../views/TankBattleMobile.vue'
+import LandlordGame from '../views/LandlordGame.vue'
 import OtherPlatforms from '../views/OtherPlatforms.vue'
 import LogAuditSystem from '../views/LogAuditSystem.vue'
 import LogAuditSystemNew from '../views/LogAuditSystemNew.vue'
@@ -29,6 +30,15 @@ import FinanceSystem from '../views/Finance/FinanceSystem.vue'
 import ArchiveSystem from '../views/Archive/ArchiveSystem.vue'
 import MessageSystem from '../views/Message/MessageSystem.vue'
 import AssetSystem from '../views/Asset/AssetSystem.vue'
+import APISystem from '../views/APISystem.vue'
+import CustomerList from '../views/CRM/CustomerList.vue'
+import SupplierList from '../views/SCM/SupplierList.vue'
+import ProductList from '../views/Shop/ProductList.vue'
+import MemberList from '../views/Member/MemberList.vue'
+import MarketingSystem from '../views/Marketing/MarketingSystem.vue'
+import CampaignList from '../views/Marketing/CampaignList.vue'
+import ChannelList from '../views/Marketing/ChannelList.vue'
+import ServiceList from '../views/Marketing/ServiceList.vue'
 
 
 // 路由规则
@@ -146,6 +156,11 @@ const routes = [
     component: TankBattleMobile
   },
   {
+    path: '/game-center/landlord',
+    name: 'LandlordGame',
+    component: LandlordGame
+  },
+  {
     path: '/game-center/netris',
     redirect: '/game-center/tetris'
   },
@@ -193,6 +208,51 @@ const routes = [
     path: '/asset',
     name: 'AssetSystem',
     component: AssetSystem
+  },
+  {
+    path: '/api',
+    name: 'APISystem',
+    component: APISystem
+  },
+  {
+    path: '/crm',
+    name: 'CustomerList',
+    component: CustomerList
+  },
+  {
+    path: '/scm',
+    name: 'SupplierList',
+    component: SupplierList
+  },
+  {
+    path: '/shop',
+    name: 'ProductList',
+    component: ProductList
+  },
+  {
+    path: '/member',
+    name: 'MemberList',
+    component: MemberList
+  },
+  {
+    path: '/marketing',
+    name: 'MarketingSystem',
+    component: MarketingSystem
+  },
+  {
+    path: '/marketing/campaign',
+    name: 'CampaignList',
+    component: CampaignList
+  },
+  {
+    path: '/marketing/channel',
+    name: 'ChannelList',
+    component: ChannelList
+  },
+  {
+    path: '/marketing/service',
+    name: 'ServiceList',
+    component: ServiceList
   },
 ]
 

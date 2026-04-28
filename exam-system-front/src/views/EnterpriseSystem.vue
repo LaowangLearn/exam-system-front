@@ -103,6 +103,72 @@
           <span class="tag">维修</span>
         </div>
       </div>
+
+      <div class="system-card crm-system" @click="navigateTo('/crm')">
+        <div class="system-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <h3>CRM客户管理系统</h3>
+        <p>客户信息、商机管理、跟进记录、任务分配、客户分析</p>
+        <div class="system-tags">
+          <span class="tag">客户</span>
+          <span class="tag">商机</span>
+          <span class="tag">跟进</span>
+        </div>
+      </div>
+
+      <div class="system-card scm-system" @click="navigateTo('/scm')">
+        <div class="system-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 7h-9"></path>
+            <path d="M7 10V5a2 2 0 0 1 2-2h6l4 4v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6l4-4z"></path>
+            <polyline points="16 16 16 10 22 10"></polyline>
+          </svg>
+        </div>
+        <h3>SCM供应链管理系统</h3>
+        <p>供应商管理、采购订单、合同管理、库存管理、报表分析</p>
+        <div class="system-tags">
+          <span class="tag">供应商</span>
+          <span class="tag">采购</span>
+          <span class="tag">库存</span>
+        </div>
+      </div>
+
+      <div class="system-card shop-system" @click="navigateTo('/shop')">
+        <div class="system-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h3>电商商城系统</h3>
+        <p>商品管理、订单处理、支付结算、营销活动、数据分析</p>
+        <div class="system-tags">
+          <span class="tag">商品</span>
+          <span class="tag">订单</span>
+          <span class="tag">支付</span>
+        </div>
+      </div>
+
+      <div class="system-card member-system" @click="navigateTo('/member')">
+        <div class="system-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <h3>会员管理系统</h3>
+        <p>会员注册、积分管理、等级体系、消费记录、权益服务</p>
+        <div class="system-tags">
+          <span class="tag">会员</span>
+          <span class="tag">积分</span>
+          <span class="tag">权益</span>
+        </div>
+      </div>
     </div>
 
     <div class="system-features">
@@ -276,6 +342,18 @@ const navigateTo = (path: string) => {
 
 .asset-system { --accent-color: #fb7185; }
 .asset-system:hover { border-bottom: 4px solid #fb7185; }
+
+.crm-system { --accent-color: #667eea; }
+.crm-system:hover { border-bottom: 4px solid #667eea; }
+
+.scm-system { --accent-color: #8b5cf6; }
+.scm-system:hover { border-bottom: 4px solid #8b5cf6; }
+
+.shop-system { --accent-color: #ec4899; }
+.shop-system:hover { border-bottom: 4px solid #ec4899; }
+
+.member-system { --accent-color: #14b8a6; }
+.member-system:hover { border-bottom: 4px solid #14b8a6; }
 
 .system-features {
   max-width: 1400px;
