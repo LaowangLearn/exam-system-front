@@ -39,6 +39,20 @@ import MarketingSystem from '../views/Marketing/MarketingSystem.vue'
 import CampaignList from '../views/Marketing/CampaignList.vue'
 import ChannelList from '../views/Marketing/ChannelList.vue'
 import ServiceList from '../views/Marketing/ServiceList.vue'
+// 政务系统组件
+const GovSystem = () => import('../views/Gov/GovSystem.vue')
+const GovDashboard = () => import('../views/Gov/Dashboard.vue')
+const GridCell = () => import('../views/Gov/Grid/Cell.vue')
+const GridEvent = () => import('../views/Gov/Grid/Event.vue')
+const GridInspection = () => import('../views/Gov/Grid/Inspection.vue')
+const PetitionRegister = () => import('../views/Gov/Petition/Register.vue')
+const PetitionWork = () => import('../views/Gov/Petition/Work.vue')
+const SecurityDevice = () => import('../views/Gov/Security/Device.vue')
+const SecurityAlarm = () => import('../views/Gov/Security/Alarm.vue')
+const SecurityMonitor = () => import('../views/Gov/Security/Monitor.vue')
+const DocumentList = () => import('../views/Gov/Document/List.vue')
+const DocumentCreate = () => import('../views/Gov/Document/Create.vue')
+const DocumentApproval = () => import('../views/Gov/Document/Approval.vue')
 
 
 // 路由规则
@@ -253,6 +267,72 @@ const routes = [
     path: '/marketing/service',
     name: 'ServiceList',
     component: ServiceList
+  },
+  // 政务系统路由
+  {
+    path: '/gov',
+    name: 'GovSystem',
+    component: GovSystem
+  },
+  {
+    path: '/gov/dashboard',
+    name: 'GovDashboard',
+    component: GovDashboard
+  },
+  {
+    path: '/gov/grid/cell',
+    name: 'GridCell',
+    component: GridCell
+  },
+  {
+    path: '/gov/grid/event',
+    name: 'GridEvent',
+    component: GridEvent
+  },
+  {
+    path: '/gov/grid/inspection',
+    name: 'GridInspection',
+    component: GridInspection
+  },
+  {
+    path: '/gov/petition/register',
+    name: 'PetitionRegister',
+    component: PetitionRegister
+  },
+  {
+    path: '/gov/petition/work',
+    name: 'PetitionWork',
+    component: PetitionWork
+  },
+  {
+    path: '/gov/security/device',
+    name: 'SecurityDevice',
+    component: SecurityDevice
+  },
+  {
+    path: '/gov/security/alarm',
+    name: 'SecurityAlarm',
+    component: SecurityAlarm
+  },
+  {
+    path: '/gov/security/monitor',
+    name: 'SecurityMonitor',
+    component: SecurityMonitor
+  },
+  {
+    path: '/gov/document/list',
+    name: 'DocumentList',
+    component: DocumentList
+  },
+  {
+    path: '/gov/document/create',
+    name: 'DocumentCreate',
+    component: DocumentCreate
+  },
+  {
+    path: '/gov/document/approval',
+    name: 'DocumentApproval',
+    component: DocumentApproval
   },
 ]
 

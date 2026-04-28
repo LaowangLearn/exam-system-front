@@ -206,6 +206,22 @@
           <span class="hover-arrow">→</span>
         </div>
       </div>
+      
+      <div class="system-card" @click="goToGovSystem">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <h3>政务事业单位类</h3>
+        <p>政务一体化综合管理平台</p>
+        <div class="card-hover">
+          <span class="hover-text">立即访问</span>
+          <span class="hover-arrow">→</span>
+        </div>
+      </div>
     </div>
     
     <!-- 页面底部 -->
@@ -331,6 +347,30 @@ const goToAPISystem = () => {
 
 const goToMarketingSystem = () => {
   router.push('/marketing')
+}
+
+const goToGovSystem = () => {
+  router.push('/gov')
+}
+
+const goToGovIntegration = () => {
+  router.push('/gov')
+}
+
+const goToGridGovernance = () => {
+  router.push('/gov/grid/cell')
+}
+
+const goToPetitionWorkOrder = () => {
+  router.push('/gov/petition/register')
+}
+
+const goToSmartSecurity = () => {
+  router.push('/gov/security/monitor')
+}
+
+const goToDocumentSystem = () => {
+  router.push('/gov/document/list')
 }
 
 const switchToOld = () => {
