@@ -1,6 +1,6 @@
 <template>
   <div class="gov-document-approval">
-    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
+    <button class="back-btn" @click="goBack">返回政务事业单位类</button>
     <div class="page-header">
       <h1>公文审批</h1>
     </div>
@@ -8,7 +8,7 @@
     <el-card>
       <div class="search-bar">
         <el-input placeholder="公文标题/文号" v-model="searchText" style="width: 300px;" />
-        <el-select v-model="searchStatus" placeholder="审批状�?>
+        <el-select v-model="searchStatus" placeholder="审批状态">
           <el-option :label="label" :value="value" v-for="item in statusOptions" :key="item.value" />
         </el-select>
         <el-button type="primary" @click="handleSearch">搜索</el-button>
@@ -27,8 +27,8 @@
             <el-tag :type="getStatusType(row.status)">{{ getStepLabel(row.currentStep) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="nextApprover" label="下一审批�? width="120" />
-        <el-table-column prop="createUser" label="拟稿�? width="100" />
+        <el-table-column prop="nextApprover" label="下一审批人" width="120" />
+        <el-table-column prop="createUser" label="拟稿人" width="100" />
         <el-table-column prop="submitTime" label="提交时间" width="160" />
         <el-table-column label="操作" width="200">
           <template #default="{ row }">
@@ -43,7 +43,7 @@
     <el-dialog title="公文审批" :visible.sync="dialogVisible">
       <el-form :model="approvalForm" label-width="80px">
         <el-form-item label="审批意见">
-          <el-textarea v-model="approvalForm.comment" :rows="4" placeholder="请输入审批意�? />
+          <el-textarea v-model="approvalForm.comment" :rows="4" placeholder="请输入审批意见" />
         </el-form-item>
       </el-form>
       <div slot="footer">
@@ -66,18 +66,7 @@ const goBack = () => {
 }
 
 const searchText = ref('')
-const router = useRouter()
-
-const goBack = () => {
-  router.push('/gov')
-}
-
 const searchStatus = ref('')
-const router = useRouter()
-
-const goBack = () => {
-  router.push('/gov')
-}
 
 const dialogVisible = ref(false)
 
@@ -86,26 +75,20 @@ const approvalForm = reactive({
 })
 
 const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '待审�?, value: '2' },
-  { label: '已通过', value: '3' },
-  { label: '已驳�?, value: '4' }
-]
-
-const router = useRouter()
-
-const goBack = () => {
-  router.push('/gov')
-}
+    { label: '全部', value: '' },
+    { label: '待审核', value: '2' },
+    { label: '已通过', value: '3' },
+    { label: '已驳回', value: '4' }
+  ]
 
 const tableData = ref([
   {
     id: 1,
-    docCode: 'XX�?026�?�?,
+    docCode: 'XX20260428001',
     docTitle: '关于开展安全生产检查的通知',
     docType: 1,
     currentStep: 2,
-    nextApprover: '李主�?,
+    nextApprover: '李主任',
     createUser: '张三',
     submitTime: '2026-04-28 09:00',
     status: 2,
@@ -113,11 +96,11 @@ const tableData = ref([
   },
   {
     id: 2,
-    docCode: 'XX�?026�?�?,
+    docCode: 'XX20260428002',
     docTitle: '2026年第一季度工作报告',
     docType: 2,
     currentStep: 1,
-    nextApprover: '王科�?,
+    nextApprover: '王科长',
     createUser: '李四',
     submitTime: '2026-04-28 10:30',
     status: 2,
@@ -125,8 +108,8 @@ const tableData = ref([
   },
   {
     id: 3,
-    docCode: 'XX�?026�?�?,
-    docTitle: '关于申请经费的请�?,
+    docCode: 'XX20260427001',
+    docTitle: '关于申请经费的请示',
     docType: 3,
     currentStep: 3,
     nextApprover: '-',
@@ -164,9 +147,9 @@ const canApprove = (row) => {
 }
 
 const getTypeLabel = (type) => {
-  const types = { 1: '通知', 2: '报告', 3: '请示', 4: '批复', 5: '�? }
-  return types[type] || '其他'
-}
+    const types = { 1: '通知', 2: '报告', 3: '请示', 4: '批复', 5: '函' }
+    return types[type] || '其他'
+  }
 
 const getStepLabel = (step) => {
   const steps = { 1: '科室初审', 2: '部门审核', 3: '领导审批', 4: '发布' }

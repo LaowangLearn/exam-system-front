@@ -1,6 +1,6 @@
 <template>
   <div class="gov-document-list">
-    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
+    <button class="back-btn" @click="goBack">返回政务事业单位类</button>
     <div class="page-header">
       <h1>公文列表</h1>
       <div class="header-actions">
@@ -30,12 +30,12 @@
             <el-tag :type="getLevelType(row.docLevel)">{{ getLevelLabel(row.docLevel) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状�? width="100">
+        <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="getStatusType(row.status)">{{ getStatusLabel(row.status) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="createUser" label="拟稿�? width="100" />
+        <el-table-column prop="createUser" label="拟稿人" width="100" />
         <el-table-column prop="createTime" label="创建时间" width="160" />
         <el-table-column label="操作" width="180">
           <template #default="{ row }">
@@ -60,12 +60,6 @@ const goBack = () => {
 }
 
 const searchText = ref('')
-const router = useRouter()
-
-const goBack = () => {
-  router.push('/gov')
-}
-
 const searchType = ref('')
 
 const typeOptions = [
@@ -76,16 +70,10 @@ const typeOptions = [
   { label: '批复', value: '4' }
 ]
 
-const router = useRouter()
-
-const goBack = () => {
-  router.push('/gov')
-}
-
 const tableData = ref([
   {
     id: 1,
-    docCode: 'XX�?026�?�?,
+    docCode: 'XX20260428001',
     docTitle: '关于开展安全生产检查的通知',
     docType: 1,
     docLevel: 2,
@@ -95,7 +83,7 @@ const tableData = ref([
   },
   {
     id: 2,
-    docCode: 'XX�?026�?�?,
+    docCode: 'XX20260428002',
     docTitle: '2026年第一季度工作报告',
     docType: 2,
     docLevel: 3,
@@ -105,8 +93,8 @@ const tableData = ref([
   },
   {
     id: 3,
-    docCode: 'XX�?026�?�?,
-    docTitle: '关于申请经费的请�?,
+    docCode: 'XX20260427001',
+    docTitle: '关于申请经费的请示',
     docType: 3,
     docLevel: 3,
     status: 3,
@@ -136,13 +124,13 @@ const handleSubmit = (row) => {
 }
 
 const getTypeLabel = (type) => {
-  const types = { 1: '通知', 2: '报告', 3: '请示', 4: '批复', 5: '�? }
-  return types[type] || '其他'
-}
+    const types = { 1: '通知', 2: '报告', 3: '请示', 4: '批复', 5: '函' }
+    return types[type] || '其他'
+  }
 
 const getLevelLabel = (level) => {
-  const levels = { 1: '绝密', 2: '机密', 3: '秘密', 4: '普�? }
-  return levels[level] || '普�?
+  const levels = { 1: '绝密', 2: '机密', 3: '秘密', 4: '普通' }
+  return levels[level] || '普通'
 }
 
 const getLevelType = (level) => {
@@ -151,9 +139,9 @@ const getLevelType = (level) => {
 }
 
 const getStatusLabel = (status) => {
-  const statuses = { 1: '草稿', 2: '审批�?, 3: '已发�?, 4: '已归�?, 5: '已撤�? }
-  return statuses[status] || '未知'
-}
+    const statuses = { 1: '草稿', 2: '审批中', 3: '已发布', 4: '已归档', 5: '已撤回' }
+    return statuses[status] || '未知'
+  }
 
 const getStatusType = (status) => {
   const types = { 1: 'info', 2: 'primary', 3: 'success', 4: 'info', 5: 'warning' }

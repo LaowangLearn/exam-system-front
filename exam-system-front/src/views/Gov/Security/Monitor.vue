@@ -1,6 +1,6 @@
 <template>
   <div class="gov-security-monitor">
-    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
+    <button class="back-btn" @click="goBack">返回政务事业单位类</button>
     <div class="page-header">
       <h1>实时监控</h1>
       <div class="header-stats">
@@ -35,7 +35,7 @@
     </div>
     
     <!-- 告警列表 -->
-    <el-card title="最新告�? class="alarm-panel">
+    <el-card title="最新告警" class="alarm-panel">
       <div class="alarm-list">
         <div class="alarm-item" v-for="alarm in recentAlarms" :key="alarm.id">
           <span :class="['alarm-level', `level-${alarm.level}`]">{{ getLevelLabel(alarm.level) }}</span>
@@ -66,16 +66,10 @@ const cameras = ref([
   { id: 6, name: '消防通道', status: 1 }
 ])
 
-const router = useRouter()
-
-const goBack = () => {
-  router.push('/gov')
-}
-
 const recentAlarms = ref([
   { id: 1, level: 1, content: '东门摄像头检测到可疑人员', time: '08:30:25' },
   { id: 2, level: 2, content: '1号楼门禁连续刷卡失败', time: '09:15:10' },
-  { id: 3, level: 3, content: '地下车库摄像头离�?, time: '10:00:15' }
+  { id: 3, level: 3, content: '地下车库摄像头离线', time: '10:00:15' }
 ])
 
 const onlineCount = computed(() => cameras.value.filter(c => c.status === 1).length)
@@ -87,13 +81,13 @@ const handleView = (camera) => {
 }
 
 const handleRecord = (camera) => {
-  alert(`开始录�? ${camera.name}`)
+  alert(`开始录制 ${camera.name}`)
 }
 
 const getLevelLabel = (level) => {
-  const levels = { 1: '紧�?, 2: '重要', 3: '一�? }
-  return levels[level] || '未知'
-}
+    const levels = { 1: '紧急', 2: '重要', 3: '一般' }
+    return levels[level] || '未知'
+  }
 </script>
 
 <style scoped>
