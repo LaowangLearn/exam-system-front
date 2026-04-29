@@ -234,21 +234,6 @@
         </div>
       </div>
       
-      <div class="system-card" @click="goToHISSystem">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 8h-14"></path>
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-        </div>
-        <h3>HIS系统</h3>
-        <p>医院信息管理系统</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
       <div class="system-card" @click="goToAPISystem">
         <div class="card-icon">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -259,6 +244,39 @@
         </div>
         <h3>公共 API</h3>
         <p>系统对外接口服务</p>
+        <div class="card-hover">
+          <span class="hover-text">立即访问</span>
+          <span class="hover-arrow">→</span>
+        </div>
+      </div>
+      
+      <div class="system-card medical-card">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 8h-14"></path>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3>医疗行业类</h3>
+        <p>医院信息化管理解决方案</p>
+        <div class="medical-subcards">
+          <div class="subcard" @click.stop="goToHISSystem">
+            <div class="subcard-icon his">🏥</div>
+            <span>HIS医院核心</span>
+          </div>
+          <div class="subcard" @click.stop="goToEMRSystem">
+            <div class="subcard-icon emr">📝</div>
+            <span>EMR电子病历</span>
+          </div>
+          <div class="subcard" @click.stop="goToLISSystem">
+            <div class="subcard-icon lis">🧪</div>
+            <span>LIS检验系统</span>
+          </div>
+          <div class="subcard" @click.stop="goToPACSSystem">
+            <div class="subcard-icon pacs">🩻</div>
+            <span>PACS影像系统</span>
+          </div>
+        </div>
         <div class="card-hover">
           <span class="hover-text">立即访问</span>
           <span class="hover-arrow">→</span>
@@ -705,6 +723,18 @@ const goToGovSystem = () => {
 
 const goToGovIntegration = () => {
   router.push('/gov')
+}
+
+const goToEMRSystem = () => {
+  router.push('/his/medicalRecord')
+}
+
+const goToLISSystem = () => {
+  router.push('/his')
+}
+
+const goToPACSSystem = () => {
+  router.push('/his')
 }
 
 const goToGridGovernance = () => {
@@ -1452,6 +1482,70 @@ const clearStorage = () => {
 
 .system-card:hover .hover-arrow {
   transform: translateX(6px);
+}
+
+/* 医疗行业卡片 */
+.medical-card {
+  background: linear-gradient(135deg, rgba(67, 233, 123, 0.05) 0%, rgba(56, 249, 215, 0.05) 100%);
+  border-color: rgba(67, 233, 123, 0.3);
+}
+
+.medical-card .card-icon {
+  background: linear-gradient(135deg, rgba(67, 233, 123, 0.15) 0%, rgba(56, 249, 215, 0.15) 100%);
+  color: #43e97b;
+}
+
+.medical-card h3 {
+  color: #22c55e;
+}
+
+.medical-card:hover h3 {
+  color: #16a34a;
+}
+
+.medical-card:hover {
+  border-color: rgba(67, 233, 123, 0.5);
+  box-shadow: 0 12px 40px rgba(67, 233, 123, 0.15);
+}
+
+.medical-subcards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.subcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.subcard:hover {
+  background: rgba(67, 233, 123, 0.1);
+  transform: translateY(-2px);
+  border-color: rgba(67, 233, 123, 0.3);
+}
+
+.subcard-icon {
+  font-size: 1.5rem;
+}
+
+.subcard span {
+  font-size: 0.75rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.subcard:hover span {
+  color: #22c55e;
 }
 
 /* 页面底部 */

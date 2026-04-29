@@ -39,6 +39,14 @@ import MarketingSystem from '../views/Marketing/MarketingSystem.vue'
 import CampaignList from '../views/Marketing/CampaignList.vue'
 import ChannelList from '../views/Marketing/ChannelList.vue'
 import ServiceList from '../views/Marketing/ServiceList.vue'
+// HIS系统组件
+const PatientManagement = () => import('../views/HIS/PatientManagement.vue')
+const RegistrationManagement = () => import('../views/HIS/RegistrationManagement.vue')
+const MedicalRecordManagement = () => import('../views/HIS/MedicalRecordManagement.vue')
+const PrescriptionManagement = () => import('../views/HIS/PrescriptionManagement.vue')
+const PaymentManagement = () => import('../views/HIS/PaymentManagement.vue')
+const HisDashboard = () => import('../views/HIS/Dashboard.vue')
+
 // 政务系统组件
 const GovSystem = () => import('../views/Gov/GovSystem.vue')
 const GovDashboard = () => import('../views/Gov/Dashboard.vue')
@@ -143,6 +151,36 @@ const routes = [
     path: '/his',
     name: 'HISSystem',
     component: HISSystem
+  },
+  {
+    path: '/his/patient',
+    name: 'PatientManagement',
+    component: PatientManagement
+  },
+  {
+    path: '/his/registration',
+    name: 'RegistrationManagement',
+    component: RegistrationManagement
+  },
+  {
+    path: '/his/medicalRecord',
+    name: 'MedicalRecordManagement',
+    component: MedicalRecordManagement
+  },
+  {
+    path: '/his/prescription',
+    name: 'PrescriptionManagement',
+    component: PrescriptionManagement
+  },
+  {
+    path: '/his/payment',
+    name: 'PaymentManagement',
+    component: PaymentManagement
+  },
+  {
+    path: '/his/dashboard',
+    name: 'HisDashboard',
+    component: HisDashboard
   },
   {
     path: '/game-center',
