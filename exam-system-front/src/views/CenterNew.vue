@@ -24,7 +24,7 @@
         <div class="header-nav">
           <nav class="nav-links">
             <a href="#" class="nav-link active">首页</a>
-            <a href="#" class="nav-link">系统服务</a>
+            <a href="/system-service" class="nav-link">系统服务</a>
             <a href="#" class="nav-link" @click.prevent="goToGameCenter">游戏中心</a>
             <a href="#" class="nav-link">关于我们</a>
             <a href="#" class="nav-link">联系我们</a>
@@ -96,7 +96,7 @@
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                   </svg>
                   <span>版本信息</span>
-                  <span class="version-badge">v2.1.0</span>
+                  <span class="version-badge">v3.0.0</span>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item logout" @click="handleLogout">
@@ -181,153 +181,6 @@
     
     <!-- 主内容区 -->
     <div class="center-content">
-      <div class="system-category">
-        <h2>通用办公类</h2>
-        <p>企业日常运营管理系统</p>
-      </div>
-      
-      <div class="system-card" @click="goToEnterpriseSystem">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="3" y1="9" x2="21" y2="9"></line>
-            <line x1="9" y1="21" x2="9" y2="9"></line>
-          </svg>
-        </div>
-        <h3>通用办公类</h3>
-        <p>六大办公子系统集成平台（包含OA功能）</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
-      <div class="system-card" @click="goToMarketingSystem">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
-        </div>
-        <h3>营销客户类</h3>
-        <p>全渠道客户营销与管理平台</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
-      <div class="system-card" @click="goToExamSystem">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-          </svg>
-        </div>
-        <h3>考试系统</h3>
-        <p>在线考试管理平台</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
-      <div class="system-card" @click="goToAPISystem">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 20V10"></path>
-            <path d="M12 20V4"></path>
-            <path d="M6 20v-6"></path>
-          </svg>
-        </div>
-        <h3>公共 API</h3>
-        <p>系统对外接口服务</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
-      <div class="system-card medical-card">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 8h-14"></path>
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-        </div>
-        <h3>医疗行业类</h3>
-        <p>医院信息化管理解决方案</p>
-        <div class="medical-subcards">
-          <div class="subcard" @click.stop="goToHISSystem">
-            <div class="subcard-icon his">🏥</div>
-            <span>HIS医院核心</span>
-          </div>
-          <div class="subcard" @click.stop="goToEMRSystem">
-            <div class="subcard-icon emr">📝</div>
-            <span>EMR电子病历</span>
-          </div>
-          <div class="subcard" @click.stop="goToLISSystem">
-            <div class="subcard-icon lis">🧪</div>
-            <span>LIS检验系统</span>
-          </div>
-          <div class="subcard" @click.stop="goToPACSSystem">
-            <div class="subcard-icon pacs">🩻</div>
-            <span>PACS影像系统</span>
-          </div>
-        </div>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
-      <div class="system-card" @click="goToGovSystem">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-            <path d="M2 17l10 5 10-5"></path>
-            <path d="M2 12l10 5 10-5"></path>
-          </svg>
-        </div>
-        <h3>政务事业单位类</h3>
-        <p>政务一体化综合管理平台</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
-      <div class="system-card education-card">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-            <polyline points="22 17 12 22 2 17"></polyline>
-            <line x1="2" y1="17" x2="2" y2="15"></line>
-          </svg>
-        </div>
-        <h3>校园教育类</h3>
-        <p>智慧校园综合管理平台</p>
-        <div class="education-subcards">
-          <div class="subcard" @click.stop="goToEduSystem('education')">
-            <div class="subcard-icon education">📚</div>
-            <span>教务管理系统</span>
-          </div>
-          <div class="subcard" @click.stop="goToEduSystem('smart')">
-            <div class="subcard-icon smart">🏫</div>
-            <span>智慧校园系统</span>
-          </div>
-          <div class="subcard" @click.stop="goToEduSystem('home')">
-            <div class="subcard-icon home">👨‍👩‍👧</div>
-            <span>家校互通系统</span>
-          </div>
-        </div>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
     </div>
     
     <!-- 页面底部 -->
@@ -368,10 +221,10 @@
         </button>
       </div>
       <div class="modal-content">
-        <div class="version-badge-large">v2.2.0</div>
+        <div class="version-badge-large">v3.0.0</div>
         <div class="version-info">
           <p><strong>系统名称</strong>：澄心若素 - 系统管理平台</p>
-          <p><strong>当前版本</strong>：v2.2.0</p>
+          <p><strong>当前版本</strong>：v3.0.0</p>
           <p><strong>更新时间</strong>：2026年04月29日</p>
           <p><strong>开发状态</strong>：已完成</p>
         </div>
@@ -444,6 +297,48 @@ const showVersionModal = ref(false)
 const showHistoryDetail = ref(false)
 
 const versionHistory = ref([
+  {
+    version: 'v3.0.0',
+    date: '2026年04月29日',
+    type: '加新功能',
+    typeClass: 'type-feature',
+    modules: [
+      {
+        title: '数据中台大数据平台',
+        changes: [
+          '大数据平台：数据管道管理、实时监控、任务调度、数据质量检测',
+          '支持Hadoop、Spark、Flink等批流处理框架',
+          '离线批处理、实时流处理、数据仓库、数据湖'
+        ]
+      },
+      {
+        title: 'AI智能Agent办公系统',
+        changes: [
+          '智能聊天界面、自然语言交互、快捷指令',
+          'Agent工具管理：文档处理、数据查询、日程管理、邮件发送',
+          '任务队列管理、智能调度能力'
+        ]
+      },
+      {
+        title: '低代码开发平台',
+        changes: [
+          '可视化组件库、模板库、拖拽式页面设计',
+          '表单、流程、报表快速构建',
+          '属性配置面板、预览发布功能'
+        ]
+      },
+      {
+        title: '信创国产化适配系统',
+        changes: [
+          '国产操作系统适配：麒麟、统信UOS、中科方德、深度Linux',
+          '国产数据库适配：达梦、人大金仓、华为高斯、南大通用',
+          '国密算法支持：SM2、SM3、SM4、SM9',
+          '国产中间件适配：东方通、金蝶、中创、宝兰德',
+          '适配检测报告生成'
+        ]
+      }
+    ]
+  },
   {
     version: 'v2.2.0',
     date: '2026年04月29日',
@@ -775,6 +670,10 @@ const goToEduSystem = (type) => {
   router.push('/education/' + type)
 }
 
+const goToDataPlatform = (type) => {
+  router.push('/data/' + type)
+}
+
 const goToSystemSettings = () => {
   router.push('/system-settings')
 }
@@ -813,6 +712,10 @@ const goToMarketingSystem = () => {
 
 const goToGovSystem = () => {
   router.push('/gov')
+}
+
+const goToSystemService = () => {
+  router.push('/system-service')
 }
 
 const goToGovIntegration = () => {

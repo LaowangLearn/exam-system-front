@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="header-right">
-        <span class="system-badge">v2.2.0</span>
+        <span class="system-badge">v3.0.0</span>
       </div>
     </div>
     

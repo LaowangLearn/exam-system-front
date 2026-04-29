@@ -53,6 +53,16 @@ const EduEducation = () => import('../views/Edu/Education.vue')
 const EduSmart = () => import('../views/Edu/Smart.vue')
 const EduHome = () => import('../views/Edu/Home.vue')
 
+// 数据中台系统组件
+const DataSystem = () => import('../views/Data/DataSystem.vue')
+const BigData = () => import('../views/Data/BigData.vue')
+const AIAgent = () => import('../views/Data/AIAgent.vue')
+const LowCode = () => import('../views/Data/LowCode.vue')
+const XinChuang = () => import('../views/Data/XinChuang.vue')
+
+// 系统服务组件
+const SystemService = () => import('../views/SystemService.vue')
+
 // 政务系统组件
 const GovSystem = () => import('../views/Gov/GovSystem.vue')
 const GovDashboard = () => import('../views/Gov/Dashboard.vue')
@@ -398,6 +408,37 @@ const routes = [
     path: '/education/home',
     name: 'EduHome',
     component: EduHome
+  },
+  // 数据中台系统路由
+  {
+    path: '/data',
+    name: 'DataSystem',
+    component: DataSystem
+  },
+  {
+    path: '/data/bigdata',
+    name: 'BigData',
+    component: BigData
+  },
+  {
+    path: '/data/ai',
+    name: 'AIAgent',
+    component: AIAgent
+  },
+  {
+    path: '/data/lowcode',
+    name: 'LowCode',
+    component: LowCode
+  },
+  {
+    path: '/data/xinchuang',
+    name: 'XinChuang',
+    component: XinChuang
+  },
+  {
+    path: '/system-service',
+    name: 'SystemService',
+    component: SystemService
   },
 ]
 
