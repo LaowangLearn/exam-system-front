@@ -96,7 +96,7 @@
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                   </svg>
                   <span>版本信息</span>
-                  <span class="version-badge">v2.0.0</span>
+                  <span class="version-badge">v2.1.0</span>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item logout" @click="handleLogout">
@@ -338,11 +338,11 @@
         </button>
       </div>
       <div class="modal-content">
-        <div class="version-badge-large">v2.0.0</div>
+        <div class="version-badge-large">v2.1.0</div>
         <div class="version-info">
           <p><strong>系统名称</strong>：澄心若素 - 系统管理平台</p>
-          <p><strong>当前版本</strong>：v2.0.0</p>
-          <p><strong>更新时间</strong>：2026年04月28日</p>
+          <p><strong>当前版本</strong>：v2.1.0</p>
+          <p><strong>更新时间</strong>：2026年04月29日</p>
           <p><strong>开发状态</strong>：已完成</p>
         </div>
         <div class="version-changes">
@@ -414,6 +414,32 @@ const showVersionModal = ref(false)
 const showHistoryDetail = ref(false)
 
 const versionHistory = ref([
+  {
+    version: 'v2.1.0',
+    date: '2026年04月29日',
+    type: '加新功能',
+    typeClass: 'type-feature',
+    modules: [
+      {
+        title: '医疗行业类系统开发',
+        changes: [
+          '医疗行业类模块创建：包含HIS医院核心、EMR电子病历、LIS检验系统、PACS影像系统',
+          'HIS医院核心系统：患者管理、挂号管理、病历管理、处方管理、收费管理、数据统计',
+          'EMR电子病历：支持主诉、现病史、既往史、体格检查、辅助检查、诊断、治疗方案录入',
+          'LIS检验系统：检验项目管理、检验结果录入与查询',
+          'PACS影像系统：医学影像归档与通信管理'
+        ]
+      },
+      {
+        title: '首页医疗行业卡片优化',
+        changes: [
+          '新增医疗行业类卡片，采用绿色主题配色',
+          '整合HIS系统到医疗行业类模块中，不再单独显示',
+          '支持四个子模块快速访问：HIS医院核心、EMR电子病历、LIS检验系统、PACS影像系统'
+        ]
+      }
+    ]
+  },
   {
     version: 'v2.0.0',
     date: '2026年04月28日',
