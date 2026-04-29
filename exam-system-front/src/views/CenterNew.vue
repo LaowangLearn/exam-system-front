@@ -21,8 +21,17 @@
             <p>高效管理，智能办公</p>
           </div>
         </div>
-        <div class="header-actions">
-          <button class="mode-toggle" @click="toggleMode">
+        <div class="header-nav">
+          <nav class="nav-links">
+            <a href="#" class="nav-link active">首页</a>
+            <a href="#" class="nav-link">系统服务</a>
+            <a href="#" class="nav-link" @click.prevent="goToGameCenter">游戏中心</a>
+            <a href="#" class="nav-link">关于我们</a>
+            <a href="#" class="nav-link">联系我们</a>
+          </nav>
+        </div>
+        <div class="header-right">
+          <button class="mode-toggle" @click="toggleDayMode">
             <span class="mode-icon">{{ isDayMode ? '🌙' : '☀️' }}</span>
             <span class="mode-text">{{ isDayMode ? '夜间模式' : '白天模式' }}</span>
           </button>
@@ -78,6 +87,16 @@
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                   </svg>
                   <span>系统设置</span>
+                </div>
+                <div class="dropdown-item" @click="showVersionModal = true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  <span>版本信息</span>
+                  <span class="version-badge">v2.0.0</span>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item logout" @click="handleLogout">
@@ -230,20 +249,6 @@
         </div>
       </div>
       
-      <div class="system-card" @click="goToGameCenter">
-        <div class="card-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-        </div>
-        <h3>游戏中心</h3>
-        <p>休闲娱乐游戏集合</p>
-        <div class="card-hover">
-          <span class="hover-text">立即访问</span>
-          <span class="hover-arrow">→</span>
-        </div>
-      </div>
-      
       <div class="system-card" @click="goToAPISystem">
         <div class="card-icon">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -293,6 +298,89 @@
       <p class="copyright">© 2026 系统管理平台</p>
     </div>
   </div>
+  
+  <!-- 版本信息弹窗 -->
+  <div v-if="showVersionModal" class="version-modal-overlay" @click.self="showVersionModal = false">
+    <div class="version-modal">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>系统版本信息</span>
+        </div>
+        <button class="modal-close" @click="showVersionModal = false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-content">
+        <div class="version-badge-large">v2.0.0</div>
+        <div class="version-info">
+          <p><strong>系统名称</strong>：澄心若素 - 系统管理平台</p>
+          <p><strong>当前版本</strong>：v2.0.0</p>
+          <p><strong>更新时间</strong>：2026年04月28日</p>
+          <p><strong>开发状态</strong>：已完成</p>
+        </div>
+        <div class="version-changes">
+          <h4>版本更新日志</h4>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag major">重大更新</span>
+              <span class="change-desc">政务事业单位类系统开发完成</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag feature">新增功能</span>
+              <span class="change-desc">网格化治理系统、综治信访工单系统、智慧安防平台、公文机要系统</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag ui">UI优化</span>
+              <span class="change-desc">首页用户菜单优化、粒子背景效果、返回按钮统一</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag bug">修复</span>
+              <span class="change-desc">修复按钮点击失效问题</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 历史更新明细 -->
+        <div class="history-section">
+          <button class="history-toggle" @click="showHistoryDetail = !showHistoryDetail">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>{{ showHistoryDetail ? '收起' : '查看历史更新明细' }}</span>
+          </button>
+          
+          <div v-if="showHistoryDetail" class="history-content">
+            <div v-for="(version, index) in versionHistory" :key="index" class="history-version">
+              <div class="version-header">
+                <span class="version-number">{{ version.version }}</span>
+                <span class="version-date">{{ version.date }}</span>
+                <span class="version-type" :class="version.typeClass">{{ version.type }}</span>
+              </div>
+              <div v-for="(module, mIndex) in version.modules" :key="mIndex" class="version-module">
+                <div class="module-title">{{ module.title }}</div>
+                <ul class="module-changes">
+                  <li v-for="(change, cIndex) in module.changes" :key="cIndex">{{ change }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn" @click="showVersionModal = false">关闭</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -304,6 +392,186 @@ const router = useRouter()
 const isDayMode = ref(false)
 const currentDate = ref('')
 const showUserMenu = ref(false)
+const showVersionModal = ref(false)
+const showHistoryDetail = ref(false)
+
+const versionHistory = ref([
+  {
+    version: 'v2.0.0',
+    date: '2026年04月28日',
+    type: '大改版/重构',
+    typeClass: 'type-major',
+    modules: [
+      {
+        title: '政务事业单位类系统开发',
+        changes: [
+          '政务一体化平台创建：支持国密SM2/SM3/SM4加密、等保三级合规设计、适配国产化数据库',
+          '网格化治理系统：网格单元管理、网格事件管理、巡检记录管理、AI智能分派建议',
+          '综治信访工单系统：信访登记管理、受理分派办理流程、AI相似案例推荐、满意度评价',
+          '智慧安防平台：设备管理、实时告警处理、AI人脸识别/车辆识别/行为分析、实时监控大屏',
+          '公文机要系统：公文起草编辑、多级审批流程、发布归档撤回、国密加密存储'
+        ]
+      },
+      {
+        title: '首页用户菜单优化',
+        changes: [
+          '个人中心入口移至右上角头像区域',
+          '添加下拉菜单（个人信息、修改密码、系统设置、退出登录、版本信息）',
+          '添加粒子背景和光环装饰效果，优化标题光晕效果'
+        ]
+      },
+      {
+        title: '全系统返回按钮优化',
+        changes: [
+          '所有页面添加左上角返回按钮',
+          '统一按钮样式（蓝色渐变、悬停效果）'
+        ]
+      }
+    ]
+  },
+  {
+    version: 'v1.2.0',
+    date: '2026年04月26日',
+    type: '加新功能',
+    typeClass: 'type-feature',
+    modules: [
+      {
+        title: '营销客户类子模块完善',
+        changes: [
+          '营销活动管理页面：活动列表展示、搜索筛选、新建编辑删除',
+          '渠道管理页面：渠道信息管理、收入统计、佣金结算',
+          '客户服务工单页面：工单创建处理、状态追踪、SLA管理'
+        ]
+      },
+      {
+        title: '业务系统UI/UX优化',
+        changes: [
+          '统一返回按钮链接到营销客户类模块',
+          '添加页面头部图标和标题样式',
+          '增强搜索栏功能、添加加载状态和空数据提示',
+          '实现可排序表头和分页控件'
+        ]
+      },
+      {
+        title: '营销客户类模块创建',
+        changes: [
+          '创建营销客户类模块入口页面',
+          '包含CRM客户管理、营销活动管理、渠道管理、客户服务工单',
+          '采用深色主题设计，卡片式布局'
+        ]
+      },
+      {
+        title: '首页Hero区域主题优化',
+        changes: [
+          '主标题"澄心若素"采用4.5rem超大字体，渐变色彩',
+          '副标题"· 纯净心灵，简约生活"',
+          '徽章文字更新为"Welcome to 澄心若素"'
+        ]
+      },
+      {
+        title: '首页日/夜间模式切换功能',
+        changes: [
+          '白天模式：浅色渐变背景，紫粉色系配色',
+          '夜间模式：深蓝色调渐变背景，玻璃效果卡片',
+          '手动切换按钮 + 自动判断模式（7:00-19:00为白天模式）',
+          '保存用户偏好到localStorage'
+        ]
+      },
+      {
+        title: '企业管理系统整合',
+        changes: [
+          '创建统一的企业管理系统集成页面',
+          '整合六大办公子系统（OA、HRM、财务、档案、沟通、资产）'
+        ]
+      },
+      {
+        title: '游戏中心界面优化',
+        changes: [
+          '优化坦克大战版本选择界面按钮样式',
+          '去除白色方块背景',
+          '提升界面视觉一致性'
+        ]
+      },
+      {
+        title: '俄罗斯方块游戏优化',
+        changes: [
+          '上下方向键用于顺时针/逆时针旋转',
+          '复活后保留游戏板下方方块，只清除最上面6行'
+        ]
+      },
+      {
+        title: '后端新增模块',
+        changes: [
+          'CRM客户管理后端',
+          'SCM供应链管理后端',
+          '电商商城后端',
+          '会员管理后端',
+          'AI本地赋能模块（文本摘要、情感分析、回复建议、关键词提取）'
+        ]
+      }
+    ]
+  },
+  {
+    version: 'v1.1.0',
+    date: '2026年04月20日',
+    type: '加新功能',
+    typeClass: 'type-feature',
+    modules: [
+      {
+        title: '俄罗斯方块游戏布局优化',
+        changes: [
+          '添加全局滚动限制',
+          '优化容器布局，减少内边距提高适配性',
+          '调整方块尺寸为28px×28px',
+          '添加响应式设计和触摸设备支持'
+        ]
+      },
+      {
+        title: '俄罗斯方块游戏复活功能',
+        changes: [
+          '添加复活次数状态变量（默认66次）',
+          '游戏结束时显示复活按钮和剩余次数',
+          '开始新游戏和重新开始时重置复活次数'
+        ]
+      }
+    ]
+  },
+  {
+    version: 'v1.0.1',
+    date: '2026年02月09日',
+    type: '改bug小优化',
+    typeClass: 'type-bug',
+    modules: [
+      {
+        title: '配置文件更新',
+        changes: [
+          '前端vite.config.ts优化构建配置（添加22行，删除2行）',
+          '后端pom.xml调整项目依赖配置',
+          '后端application.yml更新应用程序配置',
+          '添加Windows系统启动脚本start.bat',
+          '更新PowerShell启动脚本run.ps1'
+        ]
+      }
+    ]
+  },
+  {
+    version: 'v1.0.0',
+    date: '2026年02月09日之前',
+    type: '新项目上线',
+    typeClass: 'type-new',
+    modules: [
+      {
+        title: '系统初始化',
+        changes: [
+          '考试系统基础框架搭建',
+          '前端Vue 3项目初始化',
+          '后端Spring Boot项目初始化',
+          '数据库设计与初始化'
+        ]
+      }
+    ]
+  }
+])
 let modeCheckInterval: number | null = null
 let dateUpdateInterval: number | null = null
 
@@ -535,14 +803,56 @@ const clearStorage = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto 48px;
 }
 
-.header-actions {
+.header-nav {
+  flex: 1;
+  margin-left: 60px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #805ad5;
+}
+
+.nav-link.active {
+  color: #805ad5;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #805ad5, #d53f8c);
+  border-radius: 2px;
+}
+
+.header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .user-profile {
@@ -1317,6 +1627,22 @@ const clearStorage = () => {
   color: #b0c4de;
 }
 
+.night-mode .nav-link {
+  color: #b0c4de;
+}
+
+.night-mode .nav-link:hover {
+  color: #6495ed;
+}
+
+.night-mode .nav-link.active {
+  color: #6495ed;
+}
+
+.night-mode .nav-link.active::after {
+  background: linear-gradient(90deg, #6495ed, #4ecdc4);
+}
+
 .night-mode .decoration-circle.circle-1 {
   background: linear-gradient(135deg, #6495ed 0%, #4169e1 100%);
 }
@@ -1487,7 +1813,395 @@ const clearStorage = () => {
     text-shadow: 0 4px 20px rgba(100, 149, 237, 0.4);
   }
   to {
-    text-shadow: 0 4px 30px rgba(100, 149, 237, 0.8), 0 0 40px rgba(78, 205, 196, 0.4);
+    text-shadow: 0 4px 30px rgba(100, 149, 237, 0.6), 0 0 40px rgba(78, 205, 196, 0.3);
   }
 }
+
+/* 版本徽章 */
+.version-badge {
+  margin-left: auto;
+  background: linear-gradient(135deg, #805ad5 0%, #d53f8c 100%);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* 版本信息弹窗 */
+.version-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fade-in 0.2s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.version-modal {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slide-up 0.3s ease;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #4a5568;
+}
+
+.modal-content {
+  padding: 24px;
+}
+
+.version-badge-large {
+  display: inline-block;
+  background: linear-gradient(135deg, #805ad5 0%, #d53f8c 100%);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.version-info {
+  background: rgba(128, 90, 213, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.version-info p {
+  margin: 8px 0;
+  color: #4a5568;
+}
+
+.version-changes h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 16px;
+}
+
+.change-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.change-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.change-tag {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.change-tag.major {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.change-tag.feature {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.change-tag.ui {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.change-tag.bug {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+}
+
+.change-desc {
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  background: linear-gradient(135deg, #805ad5 0%, #d53f8c 100%);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(128, 90, 213, 0.4);
+}
+
+/* 历史更新明细 */
+.history-section {
+  margin-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 20px;
+}
+
+.history-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(128, 90, 213, 0.3);
+  color: #805ad5;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.history-toggle:hover {
+  background: rgba(128, 90, 213, 0.1);
+  border-color: rgba(128, 90, 213, 0.5);
+}
+
+.history-content {
+  margin-top: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.history-version {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.history-version:last-child {
+  margin-bottom: 0;
+}
+
+.version-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.version-number {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #805ad5;
+}
+
+.version-date {
+  font-size: 0.85rem;
+  color: #718096;
+}
+
+.version-type {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.version-type.type-major {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.version-type.type-feature {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.version-type.type-bug {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+}
+
+.version-type.type-new {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.version-module {
+  margin-bottom: 12px;
+}
+
+.version-module:last-child {
+  margin-bottom: 0;
+}
+
+.module-title {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.module-changes {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.module-changes li {
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+  color: #4a5568;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.module-changes li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #805ad5;
+  font-weight: bold;
+}
+
+/* 夜间模式历史明细 */
+.night-mode .history-section {
+  border-top-color: rgba(100, 149, 237, 0.2);
+}
+
+.night-mode .history-toggle {
+  border-color: rgba(100, 149, 237, 0.3);
+  color: #6495ed;
+}
+
+.night-mode .history-toggle:hover {
+  background: rgba(100, 149, 237, 0.1);
+}
+
+.night-mode .history-version {
+  background: rgba(100, 149, 237, 0.05);
+}
+
+.night-mode .version-number {
+  color: #6495ed;
+}
+
+.night-mode .version-date {
+  color: #b0c4de;
+}
+
+.night-mode .module-title {
+  color: #e0e0e0;
+}
+
+.night-mode .module-changes li {
+  color: #b0c4de;
+}
+
+.night-mode .module-changes li::before {
+  color: #6495ed;
+}
+
+/* 夜间模式版本弹窗 */
+.night-mode .version-modal {
+  background: #1a1a2e;
+}
+
+.night-mode .modal-header {
+  border-bottom-color: rgba(100, 149, 237, 0.2);
+}
+
+.night-mode .modal-title {
+  color: #e0e0e0;
+}
+
+.night-mode .version-info {
+  background: rgba(100, 149, 237, 0.1);
+}
+
+.night-mode .version-info p {
+  color: #b0c4de;
+}
+
+.night-mode .version-changes h4 {
+  color: #e0e0e0;
+}
+
+.night-mode .change-desc {
+  color: #b0c4de;
+}
+
 </style>

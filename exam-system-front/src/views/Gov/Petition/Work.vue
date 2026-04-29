@@ -1,6 +1,6 @@
 <template>
   <div class="gov-petition-work">
-    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
+    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
     <div class="page-header">
       <h1>办理工单管理</h1>
     </div>
@@ -15,7 +15,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="departmentName" label="办理单位" width="150" />
-        <el-table-column prop="userName" label="承办�? width="100" />
+        <el-table-column prop="userName" label="承办�? width="100" />
         <el-table-column prop="createTime" label="创建时间" width="160" />
         <el-table-column prop="deadline" label="截止时间" width="160" />
         <el-table-column label="操作" width="150">
@@ -44,8 +44,8 @@ const tableData = ref([
     workCode: 'GD20260428001',
     petitionCode: 'XF20260428001',
     workPhase: 2,
-    departmentName: '物业�?,
-    userName: '陈主�?,
+    departmentName: '物业�?,
+    userName: '陈主�?,
     createTime: '2026-04-28 09:30',
     deadline: '2026-05-05 09:30'
   },
@@ -55,7 +55,7 @@ const tableData = ref([
     petitionCode: 'XF20260428002',
     workPhase: 1,
     departmentName: '社保中心',
-    userName: '王科�?,
+    userName: '王科�?,
     createTime: '2026-04-28 11:00',
     deadline: '2026-05-01 11:00'
   },
@@ -65,7 +65,7 @@ const tableData = ref([
     petitionCode: 'XF20260427001',
     workPhase: 3,
     departmentName: '文体局',
-    userName: '李主�?,
+    userName: '李主�?,
     createTime: '2026-04-27 15:30',
     deadline: '2026-05-04 15:30'
   }
@@ -76,7 +76,7 @@ const handleView = (row) => {
 }
 
 const getPhaseLabel = (phase) => {
-  const phases = { 1: '待分�?, 2: '办理�?, 3: '待审�?, 4: '已完�? }
+  const phases = { 1: '待分�?, 2: '办理�?, 3: '待审�?, 4: '已完�? }
   return phases[phase] || '未知'
 }
 </script>

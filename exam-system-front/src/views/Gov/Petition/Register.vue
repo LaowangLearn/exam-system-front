@@ -1,6 +1,6 @@
 <template>
   <div class="gov-petition-register">
-    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
+    <button class="back-btn" @click="goBack">�?返回政务事业单位�?/button>
     <div class="page-header">
       <h1>信访登记管理</h1>
       <div class="header-actions">
@@ -10,7 +10,7 @@
     
     <el-card>
       <div class="search-bar">
-        <el-input placeholder="信访编号/信访�? v-model="searchText" style="width: 300px;" />
+        <el-input placeholder="信访编号/信访�? v-model="searchText" style="width: 300px;" />
         <el-select v-model="searchType" placeholder="信访类型">
           <el-option :label="label" :value="value" v-for="item in typeOptions" :key="item.value" />
         </el-select>
@@ -19,7 +19,7 @@
       
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="petitionCode" label="信访编号" width="180" />
-        <el-table-column prop="petitionerName" label="信访�? width="100" />
+        <el-table-column prop="petitionerName" label="信访�? width="100" />
         <el-table-column prop="petitionType" label="信访类型" width="100">
           <template #default="{ row }">
             <el-tag>{{ getTypeLabel(row.petitionType) }}</el-tag>
@@ -31,7 +31,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="petitionTitle" label="信访标题" />
-        <el-table-column prop="status" label="状�? width="100">
+        <el-table-column prop="status" label="状�? width="100">
           <template #default="{ row }">
             <el-tag :type="getStatusType(row.status)">{{ getStatusLabel(row.status) }}</el-tag>
           </template>
@@ -85,17 +85,17 @@ const tableData = ref([
   {
     id: 1,
     petitionCode: 'XF20260428001',
-    petitionerName: '张先�?,
+    petitionerName: '张先�?,
     petitionType: 1,
     petitionChannel: 1,
-    petitionTitle: '关于小区物业管理问题的投�?,
+    petitionTitle: '关于小区物业管理问题的投�?,
     status: 2,
     createTime: '2026-04-28 09:00'
   },
   {
     id: 2,
     petitionCode: 'XF20260428002',
-    petitionerName: '李女�?,
+    petitionerName: '李女�?,
     petitionType: 2,
     petitionChannel: 2,
     petitionTitle: '咨询社保政策',
@@ -105,7 +105,7 @@ const tableData = ref([
   {
     id: 3,
     petitionCode: 'XF20260427001',
-    petitionerName: '王先�?,
+    petitionerName: '王先�?,
     petitionType: 4,
     petitionChannel: 4,
     petitionTitle: '建议增加社区文化活动',
@@ -141,7 +141,7 @@ const getChannelLabel = (channel) => {
 }
 
 const getStatusLabel = (status) => {
-  const statuses = { 1: '待受�?, 2: '处理�?, 3: '已答�?, 4: '已结�? }
+  const statuses = { 1: '待受�?, 2: '处理�?, 3: '已答�?, 4: '已结�? }
   return statuses[status] || '未知'
 }
 
