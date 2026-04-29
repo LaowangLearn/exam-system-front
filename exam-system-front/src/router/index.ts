@@ -47,6 +47,12 @@ const PrescriptionManagement = () => import('../views/HIS/PrescriptionManagement
 const PaymentManagement = () => import('../views/HIS/PaymentManagement.vue')
 const HisDashboard = () => import('../views/HIS/Dashboard.vue')
 
+// 校园教育类系统组件
+const EduSystem = () => import('../views/Edu/EduSystem.vue')
+const EduEducation = () => import('../views/Edu/Education.vue')
+const EduSmart = () => import('../views/Edu/Smart.vue')
+const EduHome = () => import('../views/Edu/Home.vue')
+
 // 政务系统组件
 const GovSystem = () => import('../views/Gov/GovSystem.vue')
 const GovDashboard = () => import('../views/Gov/Dashboard.vue')
@@ -371,6 +377,27 @@ const routes = [
     path: '/gov/document/approval',
     name: 'DocumentApproval',
     component: DocumentApproval
+  },
+  // 校园教育类系统路由
+  {
+    path: '/education',
+    name: 'EduSystem',
+    component: EduSystem
+  },
+  {
+    path: '/education/education',
+    name: 'EduEducation',
+    component: EduEducation
+  },
+  {
+    path: '/education/smart',
+    name: 'EduSmart',
+    component: EduSmart
+  },
+  {
+    path: '/education/home',
+    name: 'EduHome',
+    component: EduHome
   },
 ]
 

@@ -298,6 +298,36 @@
           <span class="hover-arrow">→</span>
         </div>
       </div>
+      
+      <div class="system-card education-card">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <polyline points="22 17 12 22 2 17"></polyline>
+            <line x1="2" y1="17" x2="2" y2="15"></line>
+          </svg>
+        </div>
+        <h3>校园教育类</h3>
+        <p>智慧校园综合管理平台</p>
+        <div class="education-subcards">
+          <div class="subcard" @click.stop="goToEduSystem('education')">
+            <div class="subcard-icon education">📚</div>
+            <span>教务管理系统</span>
+          </div>
+          <div class="subcard" @click.stop="goToEduSystem('smart')">
+            <div class="subcard-icon smart">🏫</div>
+            <span>智慧校园系统</span>
+          </div>
+          <div class="subcard" @click.stop="goToEduSystem('home')">
+            <div class="subcard-icon home">👨‍👩‍👧</div>
+            <span>家校互通系统</span>
+          </div>
+        </div>
+        <div class="card-hover">
+          <span class="hover-text">立即访问</span>
+          <span class="hover-arrow">→</span>
+        </div>
+      </div>
     </div>
     
     <!-- 页面底部 -->
@@ -338,10 +368,10 @@
         </button>
       </div>
       <div class="modal-content">
-        <div class="version-badge-large">v2.1.0</div>
+        <div class="version-badge-large">v2.2.0</div>
         <div class="version-info">
           <p><strong>系统名称</strong>：澄心若素 - 系统管理平台</p>
-          <p><strong>当前版本</strong>：v2.1.0</p>
+          <p><strong>当前版本</strong>：v2.2.0</p>
           <p><strong>更新时间</strong>：2026年04月29日</p>
           <p><strong>开发状态</strong>：已完成</p>
         </div>
@@ -414,6 +444,30 @@ const showVersionModal = ref(false)
 const showHistoryDetail = ref(false)
 
 const versionHistory = ref([
+  {
+    version: 'v2.2.0',
+    date: '2026年04月29日',
+    type: '加新功能',
+    typeClass: 'type-feature',
+    modules: [
+      {
+        title: '校园教育类系统开发',
+        changes: [
+          '教务管理系统：课程管理、学籍管理、成绩管理、选课系统',
+          '智慧校园系统：设备管理、实时监控、告警管理、能耗监控',
+          '家校互通系统：家校消息、作业发布、成绩通知、学校通知',
+          '支持私有化部署、国产化信创适配、AI轻量化赋能'
+        ]
+      },
+      {
+        title: '首页校园教育卡片优化',
+        changes: [
+          '新增校园教育类卡片，紫色主题配色',
+          '包含三个子模块快速访问：教务管理系统、智慧校园系统、家校互通系统'
+        ]
+      }
+    ]
+  },
   {
     version: 'v2.1.0',
     date: '2026年04月29日',
@@ -715,6 +769,10 @@ const goToPersonalCenter = () => {
 
 const goToHISSystem = () => {
   router.push('/his')
+}
+
+const goToEduSystem = (type) => {
+  router.push('/education/' + type)
 }
 
 const goToSystemSettings = () => {
